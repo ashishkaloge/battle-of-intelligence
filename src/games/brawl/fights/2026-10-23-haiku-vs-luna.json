@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "round": "brawl",
+  "id": "2026-10-23-haiku-vs-luna",
+  "playedAt": "2026-10-23T10:47:24.068Z",
+  "models": {
+    "claude": {
+      "name": "Claude Haiku 5.5",
+      "id": "claude-haiku-5-5"
+    },
+    "gpt": {
+      "name": "GPT-6 Luna",
+      "id": "gpt-6-luna"
+    }
+  },
+  "effort": {
+    "claude": "low",
+    "gpt": "low"
+  },
+  "limits": {
+    "shotClockMs": 150000,
+    "callsPerCorner": 10,
+    "roundMs": 2400000,
+    "matchesToWin": 3,
+    "maxMatches": 7
+  },
+  "seed": 1441628861,
+  "prompt": 1,
+  "left": "claude",
+  "code": {
+    "house-hugger": "// House bot: keeps a wall on its right hand and follows it.\nconst TURN_RIGHT = { up: 'right', right: 'down', down: 'left', left: 'up' }\nconst TURN_LEFT = { up: 'left', left: 'down', down: 'right', right: 'up' }\nconst STEP = { up: [0, -1], right: [1, 0], down: [0, 1], left: [-1, 0] }\n\nfunction open(s, dir) {\n  const x = s.you.x + STEP[dir][0]\n  const y = s.you.y + STEP[dir][1]\n  return y >= 0 && y < s.height && x >= 0 && x < s.width && s.grid[y][x] === 0\n}\n\nfunction move(s) {\n  const right = TURN_RIGHT[s.you.dir]\n  const left = TURN_LEFT[s.you.dir]\n  for (const dir of [right, s.you.dir, left]) if (open(s, dir)) return dir\n  return s.you.dir\n}\n",
+    "house-greedy": "// House bot: steps wherever it has the most open neighbours next.\nconst STEP = { up: [0, -1], right: [1, 0], down: [0, 1], left: [-1, 0] }\n\nfunction open(s, x, y) {\n  return y >= 0 && y < s.height && x >= 0 && x < s.width && s.grid[y][x] === 0\n}\n\nfunction move(s) {\n  let best = s.you.dir\n  let most = -1\n  for (const [dir, [dx, dy]] of Object.entries(STEP)) {\n    const x = s.you.x + dx\n    const y = s.you.y + dy\n    if (!open(s, x, y)) continue\n    let around = 0\n    for (const [ex, ey] of Object.values(STEP)) if (open(s, x + ex, y + ey)) around++\n    if (around > most) {\n      most = around\n      best = dir\n    }\n  }\n  return best\n}\n",
+    "claude-1": "const DIRS = {\n  up: [0, -1],\n  down: [0, 1],\n  left: [-1, 0],\n  right: [1, 0]\n};\n\nfunction open(grid, w, h, x, y) {\n  return x >= 0 && y >= 0 && x < w && y < h && grid[y][x] === 0;\n}\n\n// count empty cells reachable from (sx, sy), capped so we stay in budget\nfunction reach(grid, w, h, sx, sy, limit) {\n  const seen = {};\n  const queue = [[sx, sy]];\n  seen[sx + \",\" + sy] = true;\n  let count = 0;\n  let qi = 0;\n  while (qi < queue.length && count < limit) {\n    const cur = queue[qi++];\n    count++;\n    for (const k in DIRS) {\n      const nx = cur[0] + DIRS[k][0];\n      const ny = cur[1] + DIRS[k][1];\n      const key = nx + \",\" + ny;\n      if (open(grid, w, h, nx, ny) && !seen[key]) {\n        seen[key] = true;\n        queue.push([nx, ny]);\n      }\n    }\n  }\n  return count;\n}\n\nfunction move(state) {\n  const w = state.width;\n  const h = state.height;\n  const grid = state.grid;\n  const you = state.you;\n  const them = state.them;\n\n  let best = null;\n  let bestScore = -Infinity;\n\n  for (const d of [\"up\", \"down\", \"left\", \"right\"]) {\n    const nx = you.x + DIRS[d][0];\n    const ny = you.y + DIRS[d][1];\n    if (!open(grid, w, h, nx, ny)) continue;\n\n    // room to keep living from the cell we would enter\n    let score = reach(grid, w, h, nx, ny, 400);\n\n    // avoid head-on collisions: stay out of the rival's immediate reach\n    if (them.alive) {\n      const dist = Math.abs(nx - them.x) + Math.abs(ny - them.y);\n      if (dist <= 2) score -= 50;\n    }\n\n    // slight preference for the centre of the floor\n    score -= Math.abs(nx - (w - 1) / 2) * 0.01;\n\n    if (score > bestScore) {\n      bestScore = score;\n      best = d;\n    }\n  }\n\n  if (best === null) {\n    // boxed in: any move is a crash, so just return something valid\n    return { dir: \"up\", say: \"Boxed in. Nice try.\" };\n  }\n\n  return { dir: best, say: \"Open floor, my lane\" };\n}",
+    "gpt-1": "function move(state) {\n  var dirs = [\"up\", \"right\", \"down\", \"left\"];\n  var dx = [0, 1, 0, -1];\n  var dy = [-1, 0, 1, 0];\n  var me = state.you, them = state.them;\n  var w = state.width, h = state.height, grid = state.grid;\n  var opp = { up: 0, right: 1, down: 2, left: 3 };\n  var cur = opp[me.dir];\n  if (cur === undefined) cur = 1;\n\n  function free(x, y) {\n    return x >= 0 && x < w && y >= 0 && y < h && grid[y][x] === 0;\n  }\n\n  function area(sx, sy, blockX, blockY) {\n    if (!free(sx, sy) || (sx === blockX && sy === blockY)) return 0;\n    var seen = new Array(h);\n    for (var y = 0; y < h; y++) seen[y] = new Uint8Array(w);\n    var qx = new Int16Array(w * h), qy = new Int16Array(w * h);\n    var head = 0, tail = 0;\n    qx[tail] = sx; qy[tail++] = sy; seen[sy][sx] = 1;\n    while (head < tail) {\n      var x = qx[head], y = qy[head++];\n      for (var d = 0; d < 4; d++) {\n        var nx = x + dx[d], ny = y + dy[d];\n        if (nx === blockX && ny === blockY) continue;\n        if (free(nx, ny) && !seen[ny][nx]) {\n          seen[ny][nx] = 1;\n          qx[tail] = nx; qy[tail++] = ny;\n        }\n      }\n    }\n    return tail;\n  }\n\n  var bestDir = cur, bestScore = -1e9;\n  for (var d = 0; d < 4; d++) {\n    if (d === ((cur + 2) & 3)) continue;\n    var nx = me.x + dx[d], ny = me.y + dy[d];\n    if (!free(nx, ny)) continue;\n\n    var nextThemX = them.x + dx[opp[them.dir]];\n    var nextThemY = them.y + dy[opp[them.dir]];\n    if (them.alive && nx === nextThemX && ny === nextThemY) continue;\n    if (them.alive && nx === them.x && ny === them.y &&\n        nextThemX === me.x && nextThemY === me.y) continue;\n\n    var space = area(nx, ny, them.x, them.y);\n    var exits = 0, onward = 0;\n    for (var e = 0; e < 4; e++) {\n      if (e !== ((d + 2) & 3) && free(nx + dx[e], ny + dy[e])) {\n        exits++;\n        var ax = nx + dx[e], ay = ny + dy[e];\n        for (var f = 0; f < 4; f++)\n          if (f !== ((e + 2) & 3) && free(ax + dx[f], ay + dy[f])) onward++;\n      }\n    }\n\n    var center = Math.abs(nx - (w - 1) / 2) + Math.abs(ny - (h - 1) / 2);\n    var towardOpp = Math.abs(nx - them.x) + Math.abs(ny - them.y);\n    var score = space * 12 + exits * 20 + onward * 2 - center * 0.2;\n    if (them.alive) score += Math.min(towardOpp, 8) * 0.15;\n    if (d === cur) score += 1.5;\n\n    if (score > bestScore) {\n      bestScore = score;\n      bestDir = d;\n    }\n  }\n  return dirs[bestDir];\n}",
+    "gpt-2": "function move(state) {\n  var dirs = [\"up\", \"right\", \"down\", \"left\"];\n  var dx = [0, 1, 0, -1], dy = [-1, 0, 1, 0];\n  var me = state.you, them = state.them, grid = state.grid;\n  var w = state.width, h = state.height;\n  var idx = { up: 0, right: 1, down: 2, left: 3 };\n  var cur = idx[me.dir];\n  if (cur === undefined) cur = 1;\n\n  function free(x, y) {\n    return x >= 0 && x < w && y >= 0 && y < h && grid[y][x] === 0;\n  }\n\n  function validPath(d, boost) {\n    var steps = boost ? 2 : 1;\n    var x = me.x, y = me.y;\n    for (var i = 0; i < steps; i++) {\n      x += dx[d]; y += dy[d];\n      if (!free(x, y)) return false;\n      if (them.alive) {\n        var od = idx[them.dir];\n        var tx = them.x + dx[od], ty = them.y + dy[od];\n        if (x === tx && y === ty) return false;\n        if (x === them.x && y === them.y && tx === me.x && ty === me.y) return false;\n      }\n    }\n    return true;\n  }\n\n  function area(sx, sy, extraX, extraY) {\n    if (!free(sx, sy)) return 0;\n    var seen = new Array(h);\n    for (var y = 0; y < h; y++) seen[y] = new Uint8Array(w);\n    var qx = new Int16Array(w * h), qy = new Int16Array(w * h);\n    var head = 0, tail = 0;\n    qx[tail] = sx; qy[tail++] = sy; seen[sy][sx] = 1;\n    while (head < tail) {\n      var x = qx[head], y = qy[head++];\n      for (var d = 0; d < 4; d++) {\n        var nx = x + dx[d], ny = y + dy[d];\n        if (nx === extraX && ny === extraY) continue;\n        if (free(nx, ny) && !seen[ny][nx]) {\n          seen[ny][nx] = 1;\n          qx[tail] = nx; qy[tail++] = ny;\n        }\n      }\n    }\n    return tail;\n  }\n\n  var bestDir = -1, bestBoost = false, bestScore = -1e30;\n  for (var d = 0; d < 4; d++) {\n    if (d === ((cur + 2) & 3)) continue;\n    for (var use = 0; use <= 1; use++) {\n      if (use && me.boosts <= 0) continue;\n      if (!validPath(d, use)) continue;\n\n      var steps = use ? 2 : 1;\n      var nx = me.x + dx[d] * steps, ny = me.y + dy[d] * steps;\n      var space = area(nx, ny, them.alive ? them.x : -1, them.alive ? them.y : -1);\n      var exits = 0, onward = 0;\n      for (var e = 0; e < 4; e++) {\n        if (e === ((d + 2) & 3)) continue;\n        if (free(nx + dx[e], ny + dy[e])) {\n          exits++;\n          var ax = nx + dx[e], ay = ny + dy[e];\n          for (var f = 0; f < 4; f++) {\n            if (f !== ((e + 2) & 3) && free(ax + dx[f], ay + dy[f])) onward++;\n          }\n        }\n      }\n\n      var center = Math.abs(nx - (w - 1) / 2) + Math.abs(ny - (h - 1) / 2);\n      var score = space * 12 + exits * 20 + onward * 2 - center * 0.2;\n      if (d === cur) score += 1.5;\n      if (use) score -= 18 + me.boosts * 2;\n      if (them.alive) {\n        var dist = Math.abs(nx - them.x) + Math.abs(ny - them.y);\n        score += Math.min(dist, 8) * 0.15;\n      }\n\n      if (score > bestScore) {\n        bestScore = score;\n        bestDir = d;\n        bestBoost = !!use;\n      }\n    }\n  }\n\n  if (bestDir < 0) {\n    for (var fallback = 0; fallback < 4; fallback++) {\n      if (fallback !== ((cur + 2) & 3)) {\n        bestDir = fallback;\n        break;\n      }\n    }\n  }\n\n  return bestBoost\n    ? { dir: dirs[bestDir], boost: true, say: \"Room to ride.\" }\n    : dirs[bestDir];\n}",
+    "claude-2": "const DIRS = {\n  up: [0, -1],\n  down: [0, 1],\n  left: [-1, 0],\n  right: [1, 0]\n};\nconst ORDER = [\"up\", \"down\", \"left\", \"right\"];\n\nfunction open(grid, w, h, x, y) {\n  return x >= 0 && y >= 0 && x < w && y < h && grid[y][x] === 0;\n}\n\n// BFS distance from (sx, sy) over empty cells, -1 where unreachable\nfunction bfs(grid, w, h, sx, sy) {\n  const dist = [];\n  for (let y = 0; y < h; y++) dist.push(new Array(w).fill(-1));\n  const queue = [[sx, sy]];\n  dist[sy][sx] = 0;\n  let qi = 0;\n  while (qi < queue.length) {\n    const cur = queue[qi++];\n    for (const k of ORDER) {\n      const nx = cur[0] + DIRS[k][0];\n      const ny = cur[1] + DIRS[k][1];\n      if (open(grid, w, h, nx, ny) && dist[ny][nx] < 0) {\n        dist[ny][nx] = dist[cur[1]][cur[0]] + 1;\n        queue.push([nx, ny]);\n      }\n    }\n  }\n  return dist;\n}\n\n// cells we reach strictly before the rival (or all reachable cells if no rival)\nfunction territory(mine, rival) {\n  let n = 0;\n  for (let y = 0; y < mine.length; y++) {\n    for (let x = 0; x < mine[y].length; x++) {\n      const m = mine[y][x];\n      if (m < 0) continue;\n      if (!rival || rival[y][x] < 0 || m < rival[y][x]) n++;\n    }\n  }\n  return n;\n}\n\nfunction evalCell(grid, w, h, x, y, rival, them, closingNow) {\n  const mine = bfs(grid, w, h, x, y);\n  let s = territory(mine, rival);\n  // stay out of head-on range\n  if (them.alive && Math.abs(x - them.x) + Math.abs(y - them.y) <= 1) s -= 80;\n  // avoid the outer band while a ring is about to close\n  if (closingNow && (x <= 1 || y <= 1 || x >= w - 2 || y >= h - 2)) s -= 40;\n  return s;\n}\n\nfunction move(state) {\n  const w = state.width;\n  const h = state.height;\n  const grid = state.grid;\n  const you = state.you;\n  const them = state.them;\n\n  const rival = them.alive ? bfs(grid, w, h, them.x, them.y) : null;\n  const closingNow = !!state.closing && state.closing.in <= 15;\n\n  let best = null;\n  let bestScore = -Infinity;\n  let bestBoost = null;\n  let bestBoostScore = -Infinity;\n\n  for (const d of ORDER) {\n    const dx = DIRS[d][0];\n    const dy = DIRS[d][1];\n    const n1x = you.x + dx;\n    const n1y = you.y + dy;\n    if (!open(grid, w, h, n1x, n1y)) continue;\n\n    const s = evalCell(grid, w, h, n1x, n1y, rival, them, closingNow);\n    if (s > bestScore) {\n      bestScore = s;\n      best = d;\n    }\n\n    // boost covers two cells: the middle one becomes trail too\n    const n2x = n1x + dx;\n    const n2y = n1y + dy;\n    if (you.boosts > 0 && open(grid, w, h, n2x, n2y)) {\n      grid[n1y][n1x] = 2;\n      const sb = evalCell(grid, w, h, n2x, n2y, rival, them, closingNow);\n      grid[n1y][n1x] = 0;\n      if (sb > bestBoostScore) {\n        bestBoostScore = sb;\n        bestBoost = d;\n      }\n    }\n  }\n\n  if (best === null) {\n    // boxed in: any move is a crash, so return a valid direction\n    return { dir: \"up\", say: \"Boxed in.\" };\n  }\n\n  // spend a boost only when it clearly gains territory\n  if (bestBoost !== null && bestBoostScore > bestScore + 25) {\n    return { dir: bestBoost, boost: true, say: \"Boost through the gap\" };\n  }\n\n  return { dir: best, say: \"Territory first, always.\" };\n}",
+    "gpt-3": "function move(state) {\n  var dirs = [\"up\", \"right\", \"down\", \"left\"];\n  var dx = [0, 1, 0, -1], dy = [-1, 0, 1, 0];\n  var w = state.width, h = state.height;\n  var me = state.you, them = state.them, grid = state.grid;\n  var idx = { up: 0, right: 1, down: 2, left: 3 };\n  var cur = idx[me.dir];\n  if (cur === undefined) cur = 1;\n\n  function free(x, y) {\n    return x >= 0 && x < w && y >= 0 && y < h && grid[y][x] === 0;\n  }\n\n  function ringSafe(x, y, ticksAhead) {\n    if (!state.closing) return true;\n    var ring = state.closing.ring;\n    var closeIn = state.closing.in;\n    // A ring closes each 25 ticks. At/after closure the new boundary is unsafe.\n    var closes = ticksAhead >= closeIn\n      ? 1 + Math.floor((ticksAhead - closeIn) / 25)\n      : 0;\n    var minX = ring + closes, minY = ring + closes;\n    return x >= minX && x < w - minX && y >= minY && y < h - minY;\n  }\n\n  function pathOK(d, steps) {\n    var x = me.x, y = me.y;\n    var od = them.alive ? idx[them.dir] : -1;\n    for (var i = 1; i <= steps; i++) {\n      x += dx[d]; y += dy[d];\n      if (!free(x, y) || !ringSafe(x, y, i)) return false;\n      if (them.alive && od >= 0) {\n        var tx = them.x + dx[od], ty = them.y + dy[od];\n        if (x === tx && y === ty) return false;\n        if (x === them.x && y === them.y && tx === me.x && ty === me.y) return false;\n      }\n    }\n    return true;\n  }\n\n  function reachable(sx, sy, maxDepth) {\n    if (!free(sx, sy)) return { count: 0, exits: 0 };\n    var seen = new Array(h);\n    for (var y = 0; y < h; y++) seen[y] = new Uint8Array(w);\n    var qx = new Int16Array(w * h), qy = new Int16Array(w * h), qd = new Uint16Array(w * h);\n    var head = 0, tail = 0;\n    qx[tail] = sx; qy[tail] = sy; qd[tail++] = 0; seen[sy][sx] = 1;\n    var exits = 0;\n    while (head < tail) {\n      var x = qx[head], y = qy[head], dep = qd[head++];\n      if (dep >= maxDepth) continue;\n      for (var d = 0; d < 4; d++) {\n        var nx = x + dx[d], ny = y + dy[d];\n        if (!free(nx, ny) || seen[ny][nx] || !ringSafe(nx, ny, dep + 1)) continue;\n        if (them.alive && nx === them.x && ny === them.y) continue;\n        seen[ny][nx] = 1;\n        qx[tail] = nx; qy[tail] = ny; qd[tail++] = dep + 1;\n      }\n    }\n    for (var e = 0; e < 4; e++) {\n      if (free(sx + dx[e], sy + dy[e]) && ringSafe(sx + dx[e], sy + dy[e], 1)) exits++;\n    }\n    return { count: tail, exits: exits };\n  }\n\n  var bestDir = -1, bestBoost = false, bestScore = -1e30;\n  for (var d = 0; d < 4; d++) {\n    if (d === ((cur + 2) & 3)) continue;\n    for (var use = 0; use <= 1; use++) {\n      if (use && me.boosts <= 0) continue;\n      var steps = use ? 2 : 1;\n      if (!pathOK(d, steps)) continue;\n      var nx = me.x + dx[d] * steps, ny = me.y + dy[d] * steps;\n      var room = reachable(nx, ny, 18);\n      var center = Math.abs(nx - (w - 1) / 2) + Math.abs(ny - (h - 1) / 2);\n      var score = room.count * 10 + room.exits * 24 - center * 0.18;\n      if (d === cur) score += 2;\n      if (use) score -= 34 + me.boosts * 4;\n      if (state.closing) {\n        var edgeDist = Math.min(nx, ny, w - 1 - nx, h - 1 - ny);\n        score += Math.min(edgeDist, 5) * 1.5;\n      }\n      if (them.alive) {\n        var dist = Math.abs(nx - them.x) + Math.abs(ny - them.y);\n        score += Math.min(dist, 8) * 0.2;\n      }\n      if (score > bestScore) {\n        bestScore = score;\n        bestDir = d;\n        bestBoost = !!use;\n      }\n    }\n  }\n\n  if (bestDir < 0) {\n    for (var f = 0; f < 4; f++) {\n      if (f !== ((cur + 2) & 3)) {\n        bestDir = f;\n        break;\n      }\n    }\n  }\n  if (bestDir < 0) bestDir = cur;\n  return bestBoost\n    ? { dir: dirs[bestDir], boost: true, say: \"Keep moving.\" }\n    : dirs[bestDir];\n}",
+    "claude-3": "const DIRS = {\n  up: [0, -1],\n  down: [0, 1],\n  left: [-1, 0],\n  right: [1, 0]\n};\nconst ORDER = [\"up\", \"down\", \"left\", \"right\"];\n\n// ring depth: 0 is the outer edge, 1 the next one in\nfunction depth(w, h, x, y) {\n  return Math.min(x, y, w - 1 - x, h - 1 - y);\n}\n\n// usable if empty and not inside a ring that is closing or closed\nfunction usable(grid, w, h, x, y, lim) {\n  if (x < 0 || y < 0 || x >= w || y >= h) return false;\n  if (grid[y][x] !== 0) return false;\n  return lim < 0 || depth(w, h, x, y) > lim;\n}\n\n// BFS distance from (sx, sy) over usable cells, -1 where unreachable\nfunction bfs(grid, w, h, sx, sy, lim) {\n  const dist = [];\n  for (let y = 0; y < h; y++) dist.push(new Array(w).fill(-1));\n  const queue = [[sx, sy]];\n  dist[sy][sx] = 0;\n  let qi = 0;\n  while (qi < queue.length) {\n    const cur = queue[qi++];\n    for (const k of ORDER) {\n      const nx = cur[0] + DIRS[k][0];\n      const ny = cur[1] + DIRS[k][1];\n      if (usable(grid, w, h, nx, ny, lim) && dist[ny][nx] < 0) {\n        dist[ny][nx] = dist[cur[1]][cur[0]] + 1;\n        queue.push([nx, ny]);\n      }\n    }\n  }\n  return dist;\n}\n\n// cells we reach strictly before the rival (or all reachable cells if no rival)\nfunction territory(mine, rival) {\n  let n = 0;\n  for (let y = 0; y < mine.length; y++) {\n    for (let x = 0; x < mine[y].length; x++) {\n      const m = mine[y][x];\n      if (m < 0) continue;\n      if (!rival || rival[y][x] < 0 || m < rival[y][x]) n++;\n    }\n  }\n  return n;\n}\n\nfunction evalCell(grid, w, h, x, y, rival, them, lim, closingIn) {\n  const mine = bfs(grid, w, h, x, y, lim);\n  let s = territory(mine, rival);\n  // stay out of head-on range\n  if (them.alive && Math.abs(x - them.x) + Math.abs(y - them.y) <= 1) s -= 80;\n  // with a ring about to close, stay well clear of its edge\n  if (lim >= 0 && closingIn <= 10 && depth(w, h, x, y) <= lim + 2) s -= 40;\n  return s;\n}\n\nfunction pick(state) {\n  const w = state.width;\n  const h = state.height;\n  const grid = state.grid;\n  const you = state.you;\n  const them = state.them;\n\n  const lim = state.closing ? state.closing.ring : -1;\n  const closingIn = state.closing ? state.closing.in : 999;\n\n  const rival = them.alive ? bfs(grid, w, h, them.x, them.y, lim) : null;\n\n  let best = null;\n  let bestScore = -Infinity;\n  let bestBoost = null;\n  let bestBoostScore = -Infinity;\n\n  for (const d of ORDER) {\n    const dx = DIRS[d][0];\n    const dy = DIRS[d][1];\n    const n1x = you.x + dx;\n    const n1y = you.y + dy;\n    if (!usable(grid, w, h, n1x, n1y, lim)) continue;\n\n    const s = evalCell(grid, w, h, n1x, n1y, rival, them, lim, closingIn);\n    if (s > bestScore) {\n      bestScore = s;\n      best = d;\n    }\n\n    // boost covers two cells: the middle one becomes trail too\n    const n2x = n1x + dx;\n    const n2y = n1y + dy;\n    if (you.boosts > 0 && usable(grid, w, h, n2x, n2y, lim)) {\n      grid[n1y][n1x] = 2;\n      const sb = evalCell(grid, w, h, n2x, n2y, rival, them, lim, closingIn);\n      grid[n1y][n1x] = 0;\n      if (sb > bestBoostScore) {\n        bestBoostScore = sb;\n        bestBoost = d;\n      }\n    }\n  }\n\n  if (best === null) {\n    // boxed in: any move is a crash, so return a valid direction\n    return { dir: \"up\", say: \"Boxed in.\" };\n  }\n\n  // spend a boost only when it clearly gains territory\n  if (bestBoost !== null && bestBoostScore > bestScore + 25) {\n    return { dir: bestBoost, boost: true, say: \"Boost through the gap\" };\n  }\n\n  return { dir: best, say: \"Inward, always.\" };\n}\n\nfunction move(state) {\n  try {\n    return pick(state);\n  } catch (e) {\n    // never throw: fall back to any open direction\n    const you = state.you;\n    for (const d of ORDER) {\n      const nx = you.x + DIRS[d][0];\n      const ny = you.y + DIRS[d][1];\n      if (usable(state.grid, state.width, state.height, nx, ny, -1)) return d;\n    }\n    return \"up\";\n  }\n}"
+  },
+  "corners": [
+    {
+      "claude": {
+        "bot": "claude-1",
+        "from": null,
+        "note": "Flood-fill for maximum open space, dodge walls and trails, and avoid head-on collisions with the rival.",
+        "tests": [
+          {
+            "against": "house-hugger",
+            "seed": 676816803,
+            "expect": "win"
+          },
+          {
+            "against": "house-greedy",
+            "seed": 559945891,
+            "expect": "win"
+          },
+          {
+            "against": "house-hugger",
+            "seed": 106848466,
+            "expect": "draw"
+          }
+        ],
+        "verdict": "Ship v1: two wins and a draw; no code visible, so a blind fix risks regressions.",
+        "fixed": false,
+        "ruling": "played",
+        "seconds": 20.6,
+        "calls": 2
+      },
+      "gpt": {
+        "bot": "gpt-1",
+        "from": null,
+        "note": "I’ll map reachable space, avoid Claude’s trail, then steer into the largest safe region while preserving escape routes.",
+        "tests": [
+          {
+            "against": "house-hugger",
+            "seed": 676816803,
+            "expect": "win"
+          },
+          {
+            "against": "house-greedy",
+            "seed": 559945891,
+            "expect": "win"
+          },
+          {
+            "against": "house-hugger",
+            "seed": 106848466,
+            "expect": "win"
+          }
+        ],
+        "verdict": "Ship v1: all three referee tests were wins, with no reported failure to fix.",
+        "fixed": false,
+        "ruling": "played",
+        "seconds": 24.4,
+        "calls": 2
+      }
+    },
+    {
+      "claude": {
+        "bot": "claude-2",
+        "from": "claude-1",
+        "note": "Race-aware territory flood fill, avoid head-on, boost only for clear territory gains.",
+        "claim": {
+          "match": 3,
+          "cause": "their-trail",
+          "text": "Their trail walled my pocket; I ran into a dead-end lane."
+        },
+        "tests": [
+          {
+            "against": "house-hugger",
+            "seed": 928273353,
+            "expect": "win"
+          },
+          {
+            "against": "house-greedy",
+            "seed": 610472201,
+            "expect": "win"
+          },
+          {
+            "against": "claude-1",
+            "seed": 934895661,
+            "expect": "draw"
+          }
+        ],
+        "verdict": "Ship v2: won two tests, drew own v1 with no losses; no fix needed.",
+        "fixed": false,
+        "ruling": "played",
+        "seconds": 39.5,
+        "calls": 2
+      },
+      "gpt": {
+        "bot": "gpt-2",
+        "from": "gpt-1",
+        "note": "I’ll score reachable space after each move, account for boost paths and collisions, and save boosts for escape.",
+        "claim": {
+          "match": 2,
+          "cause": "own-trail",
+          "text": "I chose open space by flood fill, then boxed myself into my trail."
+        },
+        "tests": [
+          {
+            "against": "house-hugger",
+            "seed": 928273353,
+            "expect": "win"
+          },
+          {
+            "against": "house-greedy",
+            "seed": 610472201,
+            "expect": "win"
+          },
+          {
+            "against": "gpt-1",
+            "seed": 934895661,
+            "expect": "loss"
+          }
+        ],
+        "verdict": "Ship v2: it beats both external opponents; one self-play loss alone doesn’t justify an unverified last-minute change.",
+        "fixed": false,
+        "ruling": "played",
+        "seconds": 29,
+        "calls": 2
+      }
+    },
+    {
+      "claude": {
+        "bot": "claude-3",
+        "from": "claude-2",
+        "note": "Hug the center, stay off the outer band, and boost to cut GPT off early.",
+        "claim": {
+          "match": 1,
+          "cause": "their-trail",
+          "text": "Their trail sealed the bottom corridor; I was cut off with no exit."
+        },
+        "tests": [
+          {
+            "against": "house-hugger",
+            "seed": 978679687,
+            "expect": "win"
+          },
+          {
+            "against": "house-greedy",
+            "seed": 406940428,
+            "expect": "win"
+          },
+          {
+            "against": "claude-2",
+            "seed": 385050050,
+            "expect": "draw"
+          }
+        ],
+        "verdict": "Ship v3: two wins, and a mirror draw vs v2 shows no defect.",
+        "fixed": false,
+        "ruling": "played",
+        "seconds": 33.6,
+        "calls": 2
+      },
+      "gpt": {
+        "bot": "gpt-3",
+        "from": "gpt-2",
+        "note": "I’ll score reachable space against the shrinking ring, avoid head-on paths, and save boosts for forced escapes.",
+        "claim": {
+          "match": 6,
+          "cause": "head-on",
+          "text": "I entered Claude’s next cell while Claude entered mine; my checks missed the swap."
+        },
+        "tests": [
+          {
+            "against": "house-hugger",
+            "seed": 978679687,
+            "expect": "win"
+          },
+          {
+            "against": "house-greedy",
+            "seed": 406940428,
+            "expect": "win"
+          },
+          {
+            "against": "gpt-2",
+            "seed": 385050050,
+            "expect": "win"
+          }
+        ],
+        "verdict": "Ship v3; it won all three referee tests, with no reported bug to justify a risky fix.",
+        "fixed": false,
+        "ruling": "played",
+        "seconds": 30.4,
+        "calls": 2
+      }
+    }
+  ],
+  "bouts": [
+    {
+      "matches": [
+        {
+          "seed": 375450239,
+          "flip": false,
+          "winner": "gpt",
+          "cause": "own-trail"
+        },
+        {
+          "seed": 153602331,
+          "flip": true,
+          "winner": "claude",
+          "cause": "their-trail"
+        },
+        {
+          "seed": 613018303,
+          "flip": false,
+          "winner": "gpt",
+          "cause": "own-trail"
+        },
+        {
+          "seed": 335773454,
+          "flip": true,
+          "winner": null,
+          "cause": "head-on"
+        },
+        {
+          "seed": 555319068,
+          "flip": false,
+          "winner": "claude",
+          "cause": "their-trail"
+        },
+        {
+          "seed": 825040787,
+          "flip": true,
+          "winner": "claude",
+          "cause": "their-trail"
+        }
+      ]
+    },
+    {
+      "matches": [
+        {
+          "seed": 177390643,
+          "flip": false,
+          "winner": "gpt",
+          "cause": "own-trail"
+        },
+        {
+          "seed": 716033739,
+          "flip": true,
+          "winner": "claude",
+          "cause": "their-trail"
+        },
+        {
+          "seed": 102838537,
+          "flip": false,
+          "winner": "gpt",
+          "cause": "own-trail"
+        },
+        {
+          "seed": 739507422,
+          "flip": true,
+          "winner": "claude",
+          "cause": "own-trail"
+        },
+        {
+          "seed": 214277809,
+          "flip": false,
+          "winner": null,
+          "cause": "own-trail"
+        },
+        {
+          "seed": 645997356,
+          "flip": true,
+          "winner": "claude",
+          "cause": "their-trail"
+        }
+      ]
+    },
+    {
+      "matches": [
+        {
+          "seed": 514235321,
+          "flip": false,
+          "winner": "gpt",
+          "cause": "wall"
+        },
+        {
+          "seed": 253031160,
+          "flip": true,
+          "winner": "claude",
+          "cause": "their-trail"
+        },
+        {
+          "seed": 938801955,
+          "flip": false,
+          "winner": "gpt",
+          "cause": "own-trail"
+        },
+        {
+          "seed": 998121504,
+          "flip": true,
+          "winner": "gpt",
+          "cause": "own-trail"
+        }
+      ]
+    }
+  ],
+  "end": {
+    "winner": "claude",
+    "bouts": {
+      "claude": 2,
+      "gpt": 1
+    }
+  },
+  "calls": {
+    "claude": 6,
+    "gpt": 6
+  },
+  "seconds": 104
+}

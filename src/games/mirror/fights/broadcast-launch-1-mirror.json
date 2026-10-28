@@ -1,0 +1,1380 @@
+{
+  "version": 1,
+  "round": "mirror",
+  "id": "broadcast-launch-1-mirror",
+  "playedAt": "2026-10-28T08:47:46.788Z",
+  "models": {
+    "claude": {
+      "name": "Claude Sonnet 5.5",
+      "id": "claude-sonnet-5-5"
+    },
+    "gpt": {
+      "name": "GPT-6.1 Terra",
+      "id": "gpt-6.1-terra"
+    }
+  },
+  "effort": {
+    "claude": "medium",
+    "gpt": "medium"
+  },
+  "limits": {
+    "turns": 5,
+    "shotClockMs": 90000,
+    "callsPerCorner": 12,
+    "roundMs": 1800000
+  },
+  "seed": 20261028,
+  "prompt": 3,
+  "left": "gpt",
+  "rules": {
+    "persistentAttackCheck": true
+  },
+  "bases": [
+    {
+      "program": [
+        {
+          "op": "extend",
+          "dir": "right"
+        }
+      ],
+      "examples": [
+        [
+          [0, 0, 8, 0, 0, 0, 0],
+          [0, 0, 8, 0, 8, 0, 0],
+          [0, 0, 8, 0, 0, 0, 2],
+          [2, 0, 8, 8, 8, 0, 2],
+          [2, 0, 0, 0, 0, 0, 2]
+        ],
+        [
+          [0, 0, 0, 8, 8, 0, 0, 0],
+          [0, 7, 0, 8, 8, 0, 0, 0],
+          [0, 7, 0, 0, 0, 0, 0, 0],
+          [0, 7, 0, 0, 0, 0, 0, 0],
+          [0, 7, 7, 7, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0]
+        ],
+        [
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 8, 0, 7, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [7, 0, 0, 0, 0, 0]
+        ]
+      ],
+      "test": [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 7],
+        [0, 2, 0, 0, 0],
+        [0, 2, 0, 0, 0],
+        [0, 2, 0, 0, 0],
+        [0, 2, 2, 2, 0]
+      ]
+    },
+    {
+      "program": [
+        {
+          "op": "rotate",
+          "turns": 1
+        }
+      ],
+      "examples": [
+        [
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 1, 1, 1],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 5, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 5, 5, 5, 5]
+        ],
+        [
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 1, 0, 0, 0, 1, 1, 1],
+          [0, 0, 0, 0, 0, 1, 0, 1],
+          [0, 0, 0, 0, 0, 1, 1, 1],
+          [0, 0, 0, 0, 0, 0, 0, 0]
+        ],
+        [
+          [0, 0, 0, 0, 0],
+          [0, 5, 5, 5, 5],
+          [0, 5, 0, 0, 5],
+          [0, 5, 0, 0, 5],
+          [0, 5, 5, 5, 5],
+          [0, 0, 0, 0, 0],
+          [0, 0, 1, 0, 0]
+        ]
+      ],
+      "test": [
+        [0, 1, 0, 0, 0, 0],
+        [0, 1, 0, 0, 3, 0],
+        [0, 1, 1, 0, 3, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0]
+      ]
+    },
+    {
+      "program": [
+        {
+          "op": "gravity",
+          "dir": "right"
+        }
+      ],
+      "examples": [
+        [
+          [0, 3, 3, 3, 0, 0],
+          [0, 3, 0, 3, 0, 0],
+          [0, 3, 3, 3, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 8, 8, 8],
+          [3, 0, 0, 8, 8, 8],
+          [3, 3, 0, 0, 0, 0]
+        ],
+        [
+          [0, 0, 0, 0, 0, 0, 0, 3],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 1, 0],
+          [0, 1, 1, 0, 0, 0, 1, 0],
+          [0, 1, 1, 0, 0, 0, 1, 1],
+          [0, 1, 1, 0, 0, 0, 0, 0]
+        ],
+        [[0, 0, 3, 0, 0], [0, 0, 0, 0, 0], [8, 8, 8, 8, 0], [0, 0, 0, 0, 0], [0, 3, 0, 0, 1]]
+      ],
+      "test": [
+        [0, 0, 0, 0, 8, 8, 0],
+        [0, 0, 0, 0, 8, 8, 0],
+        [1, 1, 1, 0, 8, 8, 0],
+        [1, 1, 1, 0, 0, 0, 0],
+        [1, 1, 1, 0, 1, 1, 0]
+      ]
+    },
+    {
+      "program": [
+        {
+          "op": "mirror",
+          "axis": "top-bottom"
+        }
+      ],
+      "examples": [
+        [
+          [9, 0, 0, 0, 0, 0],
+          [9, 0, 0, 9, 0, 0],
+          [0, 0, 0, 9, 0, 0],
+          [0, 0, 0, 9, 9, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 8, 0, 0, 4, 0],
+          [0, 0, 0, 0, 0, 0]
+        ],
+        [
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 4, 0, 0],
+          [0, 0, 0, 4, 0, 0],
+          [8, 8, 0, 4, 0, 0],
+          [8, 8, 0, 4, 4, 4],
+          [8, 8, 0, 0, 0, 0]
+        ],
+        [
+          [0, 0, 9, 9, 0],
+          [0, 0, 9, 9, 0],
+          [0, 0, 0, 0, 0],
+          [9, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0]
+        ]
+      ],
+      "test": [
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 4, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 8],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0]
+      ]
+    },
+    {
+      "program": [
+        {
+          "op": "gravity",
+          "dir": "up"
+        }
+      ],
+      "examples": [
+        [
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 1, 1, 1, 0],
+          [0, 0, 1, 1, 1, 0],
+          [0, 0, 1, 1, 1, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 5, 5],
+          [0, 0, 0, 0, 5, 5]
+        ],
+        [
+          [0, 0, 0, 0, 0, 0, 8],
+          [0, 0, 0, 0, 0, 0, 0],
+          [0, 5, 5, 0, 0, 0, 0],
+          [0, 5, 5, 0, 0, 0, 0],
+          [0, 5, 5, 0, 0, 0, 0]
+        ],
+        [
+          [0, 0, 0, 0, 0],
+          [8, 0, 0, 0, 0],
+          [8, 0, 0, 0, 0],
+          [8, 0, 0, 1, 0],
+          [0, 0, 0, 0, 0],
+          [5, 0, 0, 0, 0]
+        ]
+      ],
+      "test": [
+        [0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [5, 5, 5, 5, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0]
+      ]
+    },
+    {
+      "program": [
+        {
+          "op": "extend",
+          "dir": "up"
+        }
+      ],
+      "examples": [
+        [
+          [0, 3, 0, 0, 3, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 7, 0, 0],
+          [0, 2, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0]
+        ],
+        [
+          [0, 7, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 7, 0],
+          [2, 0, 0, 7, 0]
+        ],
+        [
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [7, 0, 0, 2, 2, 2, 0, 0],
+          [7, 0, 0, 2, 0, 2, 0, 0],
+          [7, 7, 0, 2, 2, 2, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 7, 7, 7, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0]
+        ]
+      ],
+      "test": [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [2, 0, 2, 2, 2],
+        [0, 0, 2, 0, 2],
+        [0, 0, 2, 2, 2]
+      ]
+    }
+  ],
+  "turns": [
+    {
+      "claude": {
+        "hypothesis": [
+          {
+            "op": "extend",
+            "dir": "right"
+          }
+        ],
+        "attack": {
+          "op": "mirror",
+          "axis": "top-bottom"
+        },
+        "think": "Every colored cell shoots its color rightward until it hits another colored cell or the edge. This matches all three examples.",
+        "attackThink": "A simple flip stays playable and keeps the answer unique on every base.",
+        "ruling": "played",
+        "seconds": 8.6,
+        "calls": 1,
+        "reasoning": "I'm testing a rule where each nonzero digit extends rightward until it hits another nonzero digit, filling the gap with the leftmost digit's value. Checking examples confirms this pattern holds across multiple rows.\n\nFor the attack, I need something that preserves a unique solution, so I'll go with a top-bottom mirror transformation instead of a rotation.\n\n"
+      },
+      "gpt": {
+        "hypothesis": [
+          {
+            "op": "extend",
+            "dir": "right"
+          }
+        ],
+        "attack": {
+          "op": "shift",
+          "dir": "up"
+        },
+        "think": "Each coloured cell extends right until it meets another coloured cell or the grid edge.",
+        "attackThink": "The wraparound shift changes positions while preserving the grid’s information.",
+        "ruling": "played",
+        "seconds": 9.7,
+        "calls": 1,
+        "reasoning": "**Exploring attack strategies**\n\nI'm considering various strategies for a potential attack. Extending to the right could maybe introduce ambiguity or disrupt, while attacking symmetry on the left might lead to information loss. I wonder if increased scale adds complexity and affects reliability. Shifting upward seems like it could be reversible, but it also adds complexity in inference. The interplay of these strategies seems key for effective planning. It’s a lot to think through!"
+      }
+    },
+    {
+      "claude": {
+        "hypothesis": [
+          {
+            "op": "rotate",
+            "turns": 1
+          },
+          {
+            "op": "shift",
+            "dir": "up"
+          }
+        ],
+        "attack": {
+          "op": "gravity",
+          "dir": "down"
+        },
+        "think": "Examples match rotate(1) clockwise, then GPT's stacked shift(up) wraps the top row to the bottom. Checked on A; applied to the test.",
+        "attackThink": "Deterministic, keeps puzzles playable, and should leave a unique answer on each base.",
+        "ruling": "played",
+        "seconds": 14.6,
+        "calls": 1,
+        "reasoning": "I'm noticing the input is 7 rows by 8 columns while the output is 8 rows by 7 columns, suggesting a transpose-like rotation followed by a shift upward. I'm checking the grid values row by row to confirm this pattern.\n\nI'm testing whether the output equals a 90-degree clockwise rotation of the input (reading input columns bottom-to-top as output rows), then shifted up by one row, by comparing specific cells like column 2 and column 4 against the corresponding output rows and finding they match.\n\nWorking through the remaining columns, I get rotated rows of 00000, 00111, 00100, 00000, 00330, 0000"
+      },
+      "gpt": {
+        "hypothesis": [
+          {
+            "op": "rotate",
+            "turns": 1
+          }
+        ],
+        "attack": {
+          "op": "rotate",
+          "turns": 1
+        },
+        "think": "The examples turn the entire grid 90 degrees clockwise.",
+        "attackThink": "Rotation preserves information while making the stacked transformation harder to spot.",
+        "ruling": "played",
+        "seconds": 13.3,
+        "calls": 1,
+        "reasoning": "**Analyzing rotation logic**\n\nI'm considering how rotation works in a clockwise direction. For example, when I input a 7x8 matrix, the output should be 8x7. If I rotate a 5-row by 3-column layout, I realize it maps correctly. When I test specific rows and columns, I notice patterns in outputs. One thought is to focus on preserving uniqueness in the outputs, ensuring they're distinguishable. I'll keep pushing to understand how the interactions work with rotation and shifting in this context."
+      }
+    },
+    {
+      "claude": {
+        "hypothesis": [
+          {
+            "op": "gravity",
+            "dir": "right"
+          },
+          {
+            "op": "rotate",
+            "turns": 1
+          }
+        ],
+        "attack": {
+          "op": "rotate",
+          "turns": 2
+        },
+        "think": "Example A rows pile to the right, so the base is gravity(right). The output is that result rotated 90° clockwise, which is GPT's stacked rotate(1).",
+        "attackThink": "Rotation keeps cells intact, so the result stays unique on every base grid.",
+        "ruling": "played",
+        "seconds": 15.5,
+        "calls": 1,
+        "reasoning": "Checking example A: input is 7x6, output is 6x7, so the transformation rotates the result of the base operation by 90 degrees clockwise. I'm applying a counterclockwise rotation to the given output to recover what the base operation would have produced before rotation.\n\nComparing each row confirms gravity shifts all nonzero values to the right while preserving order, then the whole grid gets rotated. So the rule is gravity-right followed by a rotation, and I start applying gravity-right to the test grid's rows one at a time, shifting nonzero cells rightward.\n\nFor an adversarial move, I want to"
+      },
+      "gpt": {
+        "hypothesis": [
+          {
+            "op": "gravity",
+            "dir": "right"
+          },
+          {
+            "op": "gravity",
+            "dir": "down"
+          }
+        ],
+        "attack": {
+          "op": "gravity",
+          "dir": "left"
+        },
+        "think": "Each row first packs to the right, then the stacked gravity move pulls the cells down.",
+        "attackThink": "Another gravity move may obscure the base rule and make the next puzzle harder.",
+        "ruling": "played",
+        "seconds": 13.8,
+        "calls": 1
+      }
+    },
+    {
+      "claude": {
+        "hypothesis": [
+          {
+            "op": "rotate",
+            "turns": 2
+          },
+          {
+            "op": "gravity",
+            "dir": "left"
+          }
+        ],
+        "attack": {
+          "op": "shift",
+          "dir": "right"
+        },
+        "think": "Example C matches rotate 180 then gravity left (GPT's stacked move). The test has 4 and 8 only; after the rotation they land at (5,1) and (3,0), and gravity left packs them to column 0.",
+        "attackThink": "Shift is reversible, so it keeps every base puzzle playable and unique.",
+        "ruling": "played",
+        "seconds": 12.5,
+        "calls": 1,
+        "reasoning": "I'm tracing example C to figure out the transformation rule, comparing where the 2x2 block and single cell move between input and output, suspecting gravity gets applied leftward after some initial shift.\n\nTesting a 180-degree rotation as the base move: applying it to the block and the lone cell, then gravity left, matches the output perfectly for example C. I'm now applying this same rotate(2) + gravity-left rule to the test grid, tracking where the 4 and 8 cells land before the leftward gravity pass.\n\nFor the attack move stacking on GPT's board, I want to pick something safe and distinguisha"
+      },
+      "gpt": {
+        "hypothesis": [
+          {
+            "op": "mirror",
+            "axis": "top-bottom"
+          },
+          {
+            "op": "rotate",
+            "turns": 2
+          }
+        ],
+        "attack": {
+          "op": "rotate",
+          "turns": 1
+        },
+        "think": "Each example flips left to right. A top-to-bottom mirror followed by the stacked half-turn produces that result.",
+        "attackThink": "A rotation after gravity changes the grid’s orientation and adds another step to track.",
+        "ruling": "played",
+        "seconds": 10.6,
+        "calls": 1
+      }
+    },
+    {
+      "claude": {
+        "hypothesis": [
+          {
+            "op": "rotate",
+            "turns": 1
+          },
+          {
+            "op": "gravity",
+            "dir": "right"
+          },
+          {
+            "op": "rotate",
+            "turns": 1
+          }
+        ],
+        "think": "Base is rotate(1) then gravity(right): columns read bottom-up, cells slide right. GPT's stacked rotate(1) comes after, so three moves.",
+        "ruling": "played",
+        "seconds": 15.2,
+        "calls": 1,
+        "reasoning": "I'm comparing the 8x6 input grid with its non-zero blocks against the 6x8 output to figure out how the shape gets rotated and repositioned.\n\nI notice if I rotate the input clockwise and then apply gravity pushing values to the right, I get the correct output pattern for each column. Testing this against multiple columns confirms the rule: rotate clockwise first, then slide everything rightward within each row.\n\nNow I'm verifying this against a second example with a 5x7 grid, checking that rotating clockwise and applying right-gravity to each row produces matching results. I'm starting a fresh "
+      },
+      "gpt": {
+        "hypothesis": [
+          {
+            "op": "gravity",
+            "dir": "up"
+          },
+          {
+            "op": "shift",
+            "dir": "right"
+          }
+        ],
+        "attack": {
+          "op": "rotate",
+          "turns": 1
+        },
+        "think": "Each column’s coloured cells settle at the top, then the grid shifts right with wraparound.",
+        "attackThink": "It landed previously and adds another transformation to Claude’s board.",
+        "ruling": "played",
+        "seconds": 12.1,
+        "calls": 1
+      }
+    }
+  ],
+  "result": {
+    "turns": [
+      {
+        "turn": 1,
+        "puzzles": {
+          "claude": {
+            "program": [
+              {
+                "op": "extend",
+                "dir": "right"
+              }
+            ],
+            "outputs": [
+              [
+                [0, 0, 8, 8, 8, 8, 8],
+                [0, 0, 8, 8, 8, 8, 8],
+                [0, 0, 8, 8, 8, 8, 2],
+                [2, 2, 8, 8, 8, 8, 2],
+                [2, 2, 2, 2, 2, 2, 2]
+              ],
+              [
+                [0, 0, 0, 8, 8, 8, 8, 8],
+                [0, 7, 7, 8, 8, 8, 8, 8],
+                [0, 7, 7, 7, 7, 7, 7, 7],
+                [0, 7, 7, 7, 7, 7, 7, 7],
+                [0, 7, 7, 7, 7, 7, 7, 7],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0]
+              ],
+              [
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 8, 8, 7, 7, 7],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [7, 7, 7, 7, 7, 7]
+              ]
+            ],
+            "truth": [
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 7],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2]
+            ]
+          },
+          "gpt": {
+            "program": [
+              {
+                "op": "extend",
+                "dir": "right"
+              }
+            ],
+            "outputs": [
+              [
+                [0, 0, 8, 8, 8, 8, 8],
+                [0, 0, 8, 8, 8, 8, 8],
+                [0, 0, 8, 8, 8, 8, 2],
+                [2, 2, 8, 8, 8, 8, 2],
+                [2, 2, 2, 2, 2, 2, 2]
+              ],
+              [
+                [0, 0, 0, 8, 8, 8, 8, 8],
+                [0, 7, 7, 8, 8, 8, 8, 8],
+                [0, 7, 7, 7, 7, 7, 7, 7],
+                [0, 7, 7, 7, 7, 7, 7, 7],
+                [0, 7, 7, 7, 7, 7, 7, 7],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0]
+              ],
+              [
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 8, 8, 7, 7, 7],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [7, 7, 7, 7, 7, 7]
+              ]
+            ],
+            "truth": [
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 7],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2]
+            ]
+          }
+        },
+        "answers": {
+          "claude": {
+            "hypothesis": [
+              {
+                "op": "extend",
+                "dir": "right"
+              }
+            ],
+            "grid": [
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 7],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2]
+            ],
+            "right": true
+          },
+          "gpt": {
+            "hypothesis": [
+              {
+                "op": "extend",
+                "dir": "right"
+              }
+            ],
+            "grid": [
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 7],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2],
+              [0, 2, 2, 2, 2]
+            ],
+            "right": true
+          }
+        },
+        "attacks": {
+          "claude": {
+            "move": {
+              "op": "mirror",
+              "axis": "top-bottom"
+            },
+            "landed": false,
+            "reason": "test-unchanged",
+            "ko": false
+          },
+          "gpt": {
+            "move": {
+              "op": "shift",
+              "dir": "up"
+            },
+            "landed": true,
+            "ko": false
+          }
+        },
+        "stacks": {
+          "claude": [
+            {
+              "op": "shift",
+              "dir": "up"
+            }
+          ],
+          "gpt": []
+        },
+        "clears": {
+          "claude": 1,
+          "gpt": 1
+        },
+        "ko": null
+      },
+      {
+        "turn": 2,
+        "puzzles": {
+          "claude": {
+            "program": [
+              {
+                "op": "rotate",
+                "turns": 1
+              },
+              {
+                "op": "shift",
+                "dir": "up"
+              }
+            ],
+            "outputs": [
+              [
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 5, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [5, 0, 0, 0, 0, 0, 0],
+                [5, 0, 0, 0, 1, 0, 0],
+                [5, 0, 0, 0, 1, 0, 0],
+                [5, 0, 0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0]
+              ],
+              [
+                [0, 0, 0, 1, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 1, 1, 0, 0, 0],
+                [0, 1, 0, 1, 0, 0, 0],
+                [0, 1, 1, 1, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0]
+              ],
+              [
+                [0, 0, 5, 5, 5, 5, 0],
+                [1, 0, 5, 0, 0, 5, 0],
+                [0, 0, 5, 0, 0, 5, 0],
+                [0, 0, 5, 5, 5, 5, 0],
+                [0, 0, 0, 0, 0, 0, 0]
+              ]
+            ],
+            "truth": [
+              [0, 0, 1, 1, 1],
+              [0, 0, 1, 0, 0],
+              [0, 0, 0, 0, 0],
+              [0, 0, 3, 3, 0],
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0]
+            ]
+          },
+          "gpt": {
+            "program": [
+              {
+                "op": "rotate",
+                "turns": 1
+              }
+            ],
+            "outputs": [
+              [
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 5, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [5, 0, 0, 0, 0, 0, 0],
+                [5, 0, 0, 0, 1, 0, 0],
+                [5, 0, 0, 0, 1, 0, 0],
+                [5, 0, 0, 0, 1, 0, 0]
+              ],
+              [
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 1, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 1, 1, 1, 0, 0, 0],
+                [0, 1, 0, 1, 0, 0, 0],
+                [0, 1, 1, 1, 0, 0, 0]
+              ],
+              [
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 5, 5, 5, 5, 0],
+                [1, 0, 5, 0, 0, 5, 0],
+                [0, 0, 5, 0, 0, 5, 0],
+                [0, 0, 5, 5, 5, 5, 0]
+              ]
+            ],
+            "truth": [
+              [0, 0, 0, 0, 0],
+              [0, 0, 1, 1, 1],
+              [0, 0, 1, 0, 0],
+              [0, 0, 0, 0, 0],
+              [0, 0, 3, 3, 0],
+              [0, 0, 0, 0, 0]
+            ]
+          }
+        },
+        "answers": {
+          "claude": {
+            "hypothesis": [
+              {
+                "op": "rotate",
+                "turns": 1
+              },
+              {
+                "op": "shift",
+                "dir": "up"
+              }
+            ],
+            "grid": [
+              [0, 0, 1, 1, 1],
+              [0, 0, 1, 0, 0],
+              [0, 0, 0, 0, 0],
+              [0, 0, 3, 3, 0],
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0]
+            ],
+            "right": true
+          },
+          "gpt": {
+            "hypothesis": [
+              {
+                "op": "rotate",
+                "turns": 1
+              }
+            ],
+            "grid": [
+              [0, 0, 0, 0, 0],
+              [0, 0, 1, 1, 1],
+              [0, 0, 1, 0, 0],
+              [0, 0, 0, 0, 0],
+              [0, 0, 3, 3, 0],
+              [0, 0, 0, 0, 0]
+            ],
+            "right": true
+          }
+        },
+        "attacks": {
+          "claude": {
+            "move": {
+              "op": "gravity",
+              "dir": "down"
+            },
+            "landed": true,
+            "ko": false
+          },
+          "gpt": {
+            "move": {
+              "op": "rotate",
+              "turns": 1
+            },
+            "landed": true,
+            "ko": false
+          }
+        },
+        "stacks": {
+          "claude": [
+            {
+              "op": "rotate",
+              "turns": 1
+            }
+          ],
+          "gpt": [
+            {
+              "op": "gravity",
+              "dir": "down"
+            }
+          ]
+        },
+        "clears": {
+          "claude": 2,
+          "gpt": 2
+        },
+        "ko": null
+      },
+      {
+        "turn": 3,
+        "puzzles": {
+          "claude": {
+            "program": [
+              {
+                "op": "gravity",
+                "dir": "right"
+              },
+              {
+                "op": "rotate",
+                "turns": 1
+              }
+            ],
+            "outputs": [
+              [
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 3, 3, 0, 0, 0, 0],
+                [0, 8, 8, 0, 3, 0, 3],
+                [3, 8, 8, 0, 3, 3, 3],
+                [3, 8, 8, 0, 3, 3, 3]
+              ],
+              [
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 1, 0, 0, 0, 0],
+                [0, 1, 1, 0, 0, 0],
+                [1, 1, 1, 0, 0, 0],
+                [1, 1, 1, 1, 0, 3]
+              ],
+              [[0, 0, 0, 0, 0], [0, 0, 8, 0, 0], [0, 0, 8, 0, 0], [3, 0, 8, 0, 0], [1, 0, 8, 0, 3]]
+            ],
+            "truth": [
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0],
+              [1, 0, 1, 0, 0],
+              [1, 0, 1, 0, 0],
+              [1, 1, 1, 0, 0],
+              [1, 1, 8, 8, 8],
+              [1, 1, 8, 8, 8]
+            ]
+          },
+          "gpt": {
+            "program": [
+              {
+                "op": "gravity",
+                "dir": "right"
+              },
+              {
+                "op": "gravity",
+                "dir": "down"
+              }
+            ],
+            "outputs": [
+              [
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 3, 3],
+                [0, 0, 0, 0, 3, 3],
+                [0, 0, 0, 3, 3, 3],
+                [0, 0, 0, 3, 8, 8],
+                [0, 0, 3, 8, 8, 8],
+                [0, 0, 3, 8, 3, 3]
+              ],
+              [
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 3],
+                [0, 0, 0, 0, 0, 0, 0, 1],
+                [0, 0, 0, 0, 0, 0, 1, 1],
+                [0, 0, 0, 0, 0, 1, 1, 1],
+                [0, 0, 0, 0, 1, 1, 1, 1]
+              ],
+              [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 3], [0, 0, 0, 8, 8], [0, 8, 8, 3, 1]]
+            ],
+            "truth": [
+              [0, 0, 0, 0, 0, 8, 8],
+              [0, 0, 0, 0, 0, 8, 8],
+              [0, 0, 0, 0, 1, 8, 8],
+              [0, 0, 1, 1, 1, 1, 1],
+              [0, 0, 1, 1, 1, 1, 1]
+            ]
+          }
+        },
+        "answers": {
+          "claude": {
+            "hypothesis": [
+              {
+                "op": "gravity",
+                "dir": "right"
+              },
+              {
+                "op": "rotate",
+                "turns": 1
+              }
+            ],
+            "grid": [
+              [0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0],
+              [1, 0, 1, 0, 0],
+              [1, 0, 1, 0, 0],
+              [1, 1, 1, 0, 0],
+              [1, 1, 8, 8, 8],
+              [1, 1, 8, 8, 8]
+            ],
+            "right": true
+          },
+          "gpt": {
+            "hypothesis": [
+              {
+                "op": "gravity",
+                "dir": "right"
+              },
+              {
+                "op": "gravity",
+                "dir": "down"
+              }
+            ],
+            "grid": [
+              [0, 0, 0, 0, 0, 8, 8],
+              [0, 0, 0, 0, 0, 8, 8],
+              [0, 0, 0, 0, 1, 8, 8],
+              [0, 0, 1, 1, 1, 1, 1],
+              [0, 0, 1, 1, 1, 1, 1]
+            ],
+            "right": true
+          }
+        },
+        "attacks": {
+          "claude": {
+            "move": {
+              "op": "rotate",
+              "turns": 2
+            },
+            "landed": true,
+            "ko": false
+          },
+          "gpt": {
+            "move": {
+              "op": "gravity",
+              "dir": "left"
+            },
+            "landed": true,
+            "ko": false
+          }
+        },
+        "stacks": {
+          "claude": [
+            {
+              "op": "gravity",
+              "dir": "left"
+            }
+          ],
+          "gpt": [
+            {
+              "op": "rotate",
+              "turns": 2
+            }
+          ]
+        },
+        "clears": {
+          "claude": 3,
+          "gpt": 3
+        },
+        "ko": null
+      },
+      {
+        "turn": 4,
+        "puzzles": {
+          "claude": {
+            "program": [
+              {
+                "op": "mirror",
+                "axis": "top-bottom"
+              },
+              {
+                "op": "gravity",
+                "dir": "left"
+              }
+            ],
+            "outputs": [
+              [
+                [0, 0, 0, 0, 0, 0],
+                [8, 4, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [9, 9, 0, 0, 0, 0],
+                [9, 0, 0, 0, 0, 0],
+                [9, 9, 0, 0, 0, 0],
+                [9, 0, 0, 0, 0, 0]
+              ],
+              [
+                [8, 8, 0, 0, 0, 0],
+                [8, 8, 4, 4, 4, 0],
+                [8, 8, 4, 0, 0, 0],
+                [4, 0, 0, 0, 0, 0],
+                [4, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0]
+              ],
+              [
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [9, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [9, 9, 0, 0, 0],
+                [9, 9, 0, 0, 0]
+              ]
+            ],
+            "truth": [
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [8, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [4, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0]
+            ]
+          },
+          "gpt": {
+            "program": [
+              {
+                "op": "mirror",
+                "axis": "top-bottom"
+              },
+              {
+                "op": "rotate",
+                "turns": 2
+              }
+            ],
+            "outputs": [
+              [
+                [0, 0, 0, 0, 0, 9],
+                [0, 0, 9, 0, 0, 9],
+                [0, 0, 9, 0, 0, 0],
+                [0, 9, 9, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 4, 0, 0, 8, 0],
+                [0, 0, 0, 0, 0, 0]
+              ],
+              [
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 4, 0, 0, 0],
+                [0, 0, 4, 0, 0, 0],
+                [0, 0, 4, 0, 8, 8],
+                [4, 4, 4, 0, 8, 8],
+                [0, 0, 0, 0, 8, 8]
+              ],
+              [
+                [0, 9, 9, 0, 0],
+                [0, 9, 9, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 9],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+              ]
+            ],
+            "truth": [
+              [0, 0, 0, 0, 0, 0],
+              [0, 4, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [8, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0]
+            ]
+          }
+        },
+        "answers": {
+          "claude": {
+            "hypothesis": [
+              {
+                "op": "rotate",
+                "turns": 2
+              },
+              {
+                "op": "gravity",
+                "dir": "left"
+              }
+            ],
+            "grid": [
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [8, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [4, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0]
+            ],
+            "right": true
+          },
+          "gpt": {
+            "hypothesis": [
+              {
+                "op": "mirror",
+                "axis": "top-bottom"
+              },
+              {
+                "op": "rotate",
+                "turns": 2
+              }
+            ],
+            "grid": [
+              [0, 0, 0, 0, 0, 0],
+              [0, 4, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [8, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0]
+            ],
+            "right": true
+          }
+        },
+        "attacks": {
+          "claude": {
+            "move": {
+              "op": "shift",
+              "dir": "right"
+            },
+            "landed": true,
+            "ko": false
+          },
+          "gpt": {
+            "move": {
+              "op": "rotate",
+              "turns": 1
+            },
+            "landed": true,
+            "ko": false
+          }
+        },
+        "stacks": {
+          "claude": [
+            {
+              "op": "rotate",
+              "turns": 1
+            }
+          ],
+          "gpt": [
+            {
+              "op": "shift",
+              "dir": "right"
+            }
+          ]
+        },
+        "clears": {
+          "claude": 4,
+          "gpt": 4
+        },
+        "ko": null
+      },
+      {
+        "turn": 5,
+        "puzzles": {
+          "claude": {
+            "program": [
+              {
+                "op": "gravity",
+                "dir": "up"
+              },
+              {
+                "op": "rotate",
+                "turns": 1
+              }
+            ],
+            "outputs": [
+              [
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 1, 1, 1],
+                [0, 0, 0, 0, 0, 1, 1, 1],
+                [0, 0, 0, 5, 5, 1, 1, 1],
+                [0, 0, 0, 0, 0, 0, 5, 5]
+              ],
+              [
+                [0, 0, 0, 0, 0],
+                [0, 0, 5, 5, 5],
+                [0, 0, 5, 5, 5],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 8]
+              ],
+              [
+                [0, 0, 5, 8, 8, 8],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 1],
+                [0, 0, 0, 0, 0, 0]
+              ]
+            ],
+            "truth": [
+              [0, 0, 0, 0, 0, 5],
+              [0, 0, 0, 0, 5, 1],
+              [0, 0, 0, 0, 0, 5],
+              [0, 0, 0, 0, 0, 5],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0]
+            ]
+          },
+          "gpt": {
+            "program": [
+              {
+                "op": "gravity",
+                "dir": "up"
+              },
+              {
+                "op": "shift",
+                "dir": "right"
+              }
+            ],
+            "outputs": [
+              [
+                [5, 0, 0, 1, 1, 1],
+                [5, 0, 0, 1, 1, 1],
+                [0, 0, 0, 1, 1, 1],
+                [0, 0, 0, 0, 0, 5],
+                [0, 0, 0, 0, 0, 5],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0]
+              ],
+              [
+                [8, 0, 5, 5, 0, 0, 0],
+                [0, 0, 5, 5, 0, 0, 0],
+                [0, 0, 5, 5, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0]
+              ],
+              [
+                [0, 8, 0, 0, 1],
+                [0, 8, 0, 0, 0],
+                [0, 8, 0, 0, 0],
+                [0, 5, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+              ]
+            ],
+            "truth": [
+              [0, 5, 1, 5, 5, 0],
+              [0, 0, 5, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0]
+            ]
+          }
+        },
+        "answers": {
+          "claude": {
+            "hypothesis": [
+              {
+                "op": "rotate",
+                "turns": 1
+              },
+              {
+                "op": "gravity",
+                "dir": "right"
+              },
+              {
+                "op": "rotate",
+                "turns": 1
+              }
+            ],
+            "grid": [
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 5, 0],
+              [0, 0, 5, 5, 1, 5]
+            ],
+            "right": false
+          },
+          "gpt": {
+            "hypothesis": [
+              {
+                "op": "gravity",
+                "dir": "up"
+              },
+              {
+                "op": "shift",
+                "dir": "right"
+              }
+            ],
+            "grid": [
+              [0, 5, 1, 5, 5, 0],
+              [0, 0, 5, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0]
+            ],
+            "right": true
+          }
+        },
+        "attacks": {
+          "gpt": {
+            "move": {
+              "op": "rotate",
+              "turns": 1
+            },
+            "landed": true,
+            "ko": false
+          }
+        },
+        "stacks": {
+          "claude": [
+            {
+              "op": "rotate",
+              "turns": 1
+            },
+            {
+              "op": "rotate",
+              "turns": 1
+            }
+          ],
+          "gpt": []
+        },
+        "clears": {
+          "claude": 4,
+          "gpt": 5
+        },
+        "ko": null
+      }
+    ],
+    "ko": null,
+    "winner": "gpt"
+  },
+  "calls": {
+    "claude": 5,
+    "gpt": 5
+  },
+  "seconds": 68,
+  "broadcast": "launch-1"
+}

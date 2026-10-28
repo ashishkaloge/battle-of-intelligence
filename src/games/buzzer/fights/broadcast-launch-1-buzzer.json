@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "round": "buzzer",
+  "id": "broadcast-launch-1-buzzer",
+  "playedAt": "2026-10-28T09:26:45.167Z",
+  "models": {
+    "claude": {
+      "name": "Claude Sonnet 5.5",
+      "id": "claude-sonnet-5-5"
+    },
+    "gpt": {
+      "name": "GPT-6.1 Terra",
+      "id": "gpt-6.1-terra"
+    }
+  },
+  "effort": {
+    "claude": "medium",
+    "gpt": "medium"
+  },
+  "limits": {
+    "tossups": 7,
+    "shotClockMs": 60000,
+    "callsPerCorner": 40,
+    "roundMs": 1800000
+  },
+  "seed": 20261028,
+  "prompt": 4,
+  "left": "claude",
+  "tossups": [
+    {
+      "problem": {
+        "text": "How many zeros are at the end of 78,307! (78,307 factorial)?",
+        "hints": [
+          "Each trailing zero needs a factor of 5; there are always more 2s.",
+          "Count the multiples of 5, then of 25, of 125, and so on.",
+          "Those counts are 15661, 3132, 626, 125, 25, 5, 1."
+        ],
+        "answer": 19575
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 19575
+            },
+            "think": "Buzzes with 19575.",
+            "ruling": "played",
+            "seconds": 5.8,
+            "calls": 1
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 19575
+            },
+            "think": "Buzzes with 19575.",
+            "ruling": "played",
+            "seconds": 13.2,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "How many positive whole numbers divide 33,124 exactly?",
+        "hints": [
+          "Factor it into primes first.",
+          "33,124 = 2² × 7² × 13².",
+          "For p^a × q^b × …, the count is (a + 1)(b + 1)…."
+        ],
+        "answer": 27
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 27
+            },
+            "think": "Buzzes with 27.",
+            "ruling": "played",
+            "seconds": 7.6,
+            "calls": 1
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 27
+            },
+            "think": "Buzzes with 27.",
+            "ruling": "played",
+            "seconds": 15,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "What are the last two digits of 43⁹⁸⁶⁵?",
+        "hints": ["Look at powers of 43 modulo 100.", "43⁴ ends in 01.", "9,865 = 4 × 2466 + 1."],
+        "answer": 43
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 43
+            },
+            "think": "Buzzes with 43.",
+            "ruling": "played",
+            "seconds": 5.8,
+            "calls": 1
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 43
+            },
+            "think": "Buzzes with 43.",
+            "ruling": "played",
+            "seconds": 14.7,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "A robot walks from the bottom-left to the top-right corner of a 8 by 7 grid of squares, one unit right or up at a time. How many different routes can it take?",
+        "hints": [
+          "Every route is a string of rights and ups.",
+          "Each route has 15 steps: 8 right and 7 up.",
+          "Choose which 8 of the 15 steps go right."
+        ],
+        "answer": 6435
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 6435
+            },
+            "think": "Buzzes with 6435.",
+            "ruling": "played",
+            "seconds": 4.2,
+            "calls": 1
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 6435
+            },
+            "think": "Buzzes with 6435.",
+            "ruling": "played",
+            "seconds": 8.5,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "How many positive whole numbers divide 12! (12 factorial) exactly?",
+        "hints": [
+          "Find the power of each prime in 12!.",
+          "12! = 2¹⁰ × 3⁵ × 5² × 7 × 11.",
+          "For p^a × q^b × …, the count is (a + 1)(b + 1)…."
+        ],
+        "answer": 792
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 792
+            },
+            "think": "Buzzes with 792.",
+            "ruling": "played",
+            "seconds": 5.4,
+            "calls": 1
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 792
+            },
+            "think": "Buzzes with 792.",
+            "ruling": "played",
+            "seconds": 9.1,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "How many whole numbers from 1 to 1,764 share no common factor with 1,764 other than 1?",
+        "hints": [
+          "That is Euler's totient of 1,764.",
+          "1,764 = 2² × 3² × 7².",
+          "Multiply n by (1 − 1/p) for each prime p that divides it."
+        ],
+        "answer": 504
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 504
+            },
+            "think": "Buzzes with 504.",
+            "ruling": "played",
+            "seconds": 4.6,
+            "calls": 1
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 504
+            },
+            "think": "Buzzes with 504.",
+            "ruling": "played",
+            "seconds": 8.7,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "What is the remainder when 11⁶⁵¹¹ is divided by 41?",
+        "hints": [
+          "Powers of 11 repeat when divided by 41.",
+          "11⁴⁰ leaves a remainder of 1 when divided by 41.",
+          "6,511 = 40 × 162 + 31."
+        ],
+        "answer": 24
+      },
+      "double": true,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 24
+            },
+            "think": "Buzzes with 24.",
+            "ruling": "played",
+            "seconds": 4.6,
+            "calls": 1
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 24
+            },
+            "think": "Buzzes with 24.",
+            "ruling": "played",
+            "seconds": 11.2,
+            "calls": 1
+          }
+        }
+      ]
+    }
+  ],
+  "end": {
+    "reason": "tossups",
+    "winner": null,
+    "score": {
+      "claude": 120,
+      "gpt": 120
+    }
+  },
+  "calls": {
+    "claude": 7,
+    "gpt": 7
+  },
+  "seconds": 80,
+  "broadcast": "launch-1"
+}

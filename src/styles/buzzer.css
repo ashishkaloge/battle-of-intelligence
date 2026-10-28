@@ -1,0 +1,286 @@
+/* Buzzer: two podiums with buzzer lights, the problem card and its hint ladder. The broadcast
+   frame around it lives in cast.css. */
+@layer components {
+  .buzzer {
+    --gold: #e9c46a;
+  }
+
+  .buzzer__set {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(10px, 2cqw, 28px);
+    width: min(100cqw, 180cqh);
+    height: 100%;
+  }
+
+  /* Podiums */
+
+  .buzzer__podium {
+    display: grid;
+    grid-row: 1;
+    justify-items: center;
+    gap: 12px;
+  }
+
+  .buzzer__podium[data-side="left"] {
+    grid-column: 1;
+  }
+  .buzzer__podium[data-side="right"] {
+    grid-column: 3;
+  }
+
+  .buzzer__face {
+    width: clamp(64px, 11cqw, 112px);
+    aspect-ratio: 1;
+    filter: drop-shadow(0 0 18px color-mix(in oklab, var(--side) 35%, transparent));
+  }
+
+  /* The buzzer: a dome that flares in the fighter's color, green when right, red when wrong. */
+  .buzzer__light {
+    width: clamp(46px, 7cqw, 66px);
+    aspect-ratio: 2;
+    border-radius: 999px 999px 8px 8px;
+    background: radial-gradient(circle at 50% 70%, #2a2d33, #16181c);
+    box-shadow:
+      inset 0 2px 0 rgb(255 255 255 / 0.08),
+      0 6px 0 #0c0d10;
+    transition:
+      background var(--t-2) var(--ease),
+      box-shadow var(--t-2) var(--ease);
+  }
+
+  .buzzer__light[data-lit] {
+    background: radial-gradient(circle at 50% 70%, #fff, var(--side) 55%);
+    box-shadow:
+      0 0 26px var(--side),
+      0 0 60px color-mix(in oklab, var(--side) 50%, transparent),
+      0 6px 0 #0c0d10;
+    animation: buzzer-flare 0.5s var(--ease-out);
+  }
+
+  .buzzer__light[data-right] {
+    --side: var(--positive);
+  }
+
+  .buzzer__light[data-wrong] {
+    --side: var(--trap);
+  }
+
+  .buzzer__answer {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    color: #0b0c0e;
+    background: var(--negative);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    animation: cast-badge 0.35s var(--ease-back) both;
+  }
+
+  .buzzer__answer[data-right] {
+    background: var(--positive);
+  }
+
+  .buzzer__plate {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 16px;
+    border-top: 2px solid var(--side);
+    border-radius: 8px;
+    background: linear-gradient(180deg, #1d2026, #121418);
+    color: var(--side);
+    font-weight: 650;
+  }
+
+  .buzzer__plate .num {
+    color: var(--text);
+    font-size: 20px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The problem and its ladder */
+
+  .buzzer__middle {
+    display: grid;
+    grid-row: 1;
+    grid-column: 2;
+    justify-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .buzzer__problem {
+    max-width: 34ch;
+    padding: 16px 20px;
+    border-radius: 12px;
+    color: #15120f;
+    background: #f4efe4;
+    box-shadow: 0 14px 30px -12px rgb(0 0 0 / 0.8);
+    font-size: clamp(15px, 1.9cqw, 21px);
+    font-weight: 650;
+    line-height: 1.35;
+    text-wrap: balance;
+    animation: buzzer-card 0.5s var(--ease-back) both;
+  }
+
+  .buzzer__ladder {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    width: min(100%, 420px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .buzzer__ladder li {
+    display: grid;
+    justify-items: center;
+    gap: 1px;
+    padding: 6px 4px;
+    border-radius: 8px;
+    color: var(--text-3);
+    box-shadow: inset 0 0 0 1px var(--hairline-2);
+    transition:
+      color var(--t-3) var(--ease),
+      background var(--t-3) var(--ease);
+  }
+
+  .buzzer__ladder span {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .buzzer__ladder b {
+    font-size: 17px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .buzzer__ladder li[data-on] {
+    color: var(--text-2);
+    background: var(--wash);
+  }
+
+  .buzzer__ladder li[data-now] {
+    color: #0b0c0e;
+    background: var(--gold);
+    box-shadow: 0 0 22px color-mix(in oklab, var(--gold) 45%, transparent);
+  }
+
+  .buzzer__hints {
+    display: grid;
+    gap: 6px;
+    width: min(100%, 440px);
+    min-height: 5.6em;
+    align-content: start;
+  }
+
+  .buzzer__hint {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: left;
+    animation: cast-line 0.35s var(--ease-out) both;
+  }
+
+  .buzzer__hint span {
+    flex: none;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .buzzer__truth {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 16px;
+    border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+    border-radius: 10px;
+    background: rgb(233 196 106 / 0.08);
+    animation: cast-badge 0.4s var(--ease-back) both;
+  }
+
+  .buzzer__truth span,
+  .buzzer__truth em {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-style: normal;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .buzzer__truth strong {
+    color: var(--text);
+    font-size: 22px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .buzzer__working {
+    font-family: var(--font-mono);
+    font-size: clamp(13px, 1.05vw, 15px);
+    line-height: 1.5;
+  }
+
+  .buzzer__banner {
+    display: grid;
+    align-content: center;
+    gap: 10px;
+    font-size: clamp(30px, 6cqw, 64px);
+    animation-duration: 1.6s;
+  }
+
+  .buzzer__banner small {
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 1.6cqw, 16px);
+    font-style: normal;
+    letter-spacing: 0.08em;
+    text-shadow: 0 2px 12px rgb(0 0 0 / 0.9);
+  }
+
+  @media (max-width: 960px) {
+    .buzzer__set {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      align-content: center;
+    }
+
+    .buzzer__middle {
+      grid-row: 1;
+      grid-column: 1 / -1;
+    }
+
+    .buzzer__podium[data-side="left"],
+    .buzzer__podium[data-side="right"] {
+      grid-row: 2;
+    }
+  }
+
+  @keyframes buzzer-flare {
+    from {
+      scale: 1.25;
+    }
+  }
+
+  @keyframes buzzer-card {
+    from {
+      opacity: 0;
+      transform: perspective(500px) rotateX(-70deg) scale(0.85);
+    }
+  }
+}

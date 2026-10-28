@@ -1,0 +1,488 @@
+/* The Ring's floor and fighters: a tilted mat seen from ringside, painted cells, hidden tiles,
+   and fighters standing up off it. The broadcast frame around it lives in cast.css. */
+@layer components {
+  .ring {
+    --tilt: 24deg;
+  }
+
+  .ring__shake {
+    position: relative;
+    width: min(100cqw, 148cqh);
+    perspective: 1500px;
+  }
+
+  .ring__board {
+    position: relative;
+    aspect-ratio: var(--cols) / var(--rows);
+    border-radius: 10px;
+    background:
+      radial-gradient(70% 90% at 50% 40%, rgb(255 255 255 / 0.05), transparent 70%),
+      linear-gradient(180deg, #1b1e24, #121418);
+    box-shadow:
+      0 0 0 14px #0d0e11,
+      0 0 0 15px var(--hairline-2),
+      0 44px 70px -20px rgb(0 0 0 / 0.85);
+    transform: rotateX(var(--tilt));
+    transform-style: preserve-3d;
+  }
+
+  /* Three ropes around the mat. Each gap is drawn in the apron's color. */
+  .ring__ropes {
+    position: absolute;
+    inset: -5px;
+    border-radius: 13px;
+    box-shadow:
+      0 0 0 1.5px rgb(255 255 255 / 0.2),
+      0 0 0 4px #0d0e11,
+      0 0 0 5.5px rgb(255 255 255 / 0.14),
+      0 0 0 8px #0d0e11,
+      0 0 0 9.5px rgb(255 255 255 / 0.09);
+    pointer-events: none;
+  }
+
+  .ring__post {
+    position: absolute;
+    width: 9px;
+    height: 30px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, rgb(0 0 0 / 0.3), transparent 60%), var(--post);
+    box-shadow: 0 0 14px color-mix(in oklab, var(--post) 50%, transparent);
+    transform: translate(-50%, -100%) rotateX(calc(-1 * var(--tilt)));
+    transform-origin: 50% 100%;
+  }
+
+  .ring__post[data-corner="tl"] {
+    --post: var(--corner-left, var(--claude));
+    top: -9px;
+    left: -9px;
+  }
+  .ring__post[data-corner="bl"] {
+    --post: var(--corner-left, var(--claude));
+    top: calc(100% + 9px);
+    left: -9px;
+  }
+  .ring__post[data-corner="tr"] {
+    --post: var(--corner-right, var(--gpt));
+    top: -9px;
+    left: calc(100% + 9px);
+  }
+  .ring__post[data-corner="br"] {
+    --post: var(--corner-right, var(--gpt));
+    top: calc(100% + 9px);
+    left: calc(100% + 9px);
+  }
+
+  .ring__cell {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: calc(100% / var(--cols));
+    height: calc(100% / var(--rows));
+  }
+
+  .ring__cell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 0.5px rgb(255 255 255 / 0.05);
+  }
+
+  .ring__paint {
+    position: absolute;
+    inset: -7%;
+    width: 114%;
+    height: 114%;
+    fill: color-mix(in oklab, var(--side) 48%, transparent);
+    animation: ring-splat 0.42s var(--ease-back) both;
+  }
+
+  .ring__paint[data-owner="claude"] {
+    --side: var(--claude);
+  }
+  .ring__paint[data-owner="gpt"] {
+    --side: var(--gpt);
+  }
+
+  .ring__mark {
+    position: absolute;
+    inset: 16%;
+    border-radius: 50%;
+    border: 1.5px solid rgb(255 255 255 / 0.16);
+    box-shadow:
+      inset 0 0 0 5px rgb(255 255 255 / 0.03),
+      0 0 24px rgb(255 255 255 / 0.04);
+  }
+
+  /* The center holder's bounty: what the rival takes by knocking it off. */
+  .ring__bounty {
+    position: absolute;
+    right: -6%;
+    bottom: -8%;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: var(--side);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 0 14px color-mix(in srgb, var(--side) 45%, transparent);
+    animation: pop-in var(--t-2) var(--ease-out);
+  }
+  .ring__bounty[data-owner="claude"] {
+    --side: var(--claude);
+  }
+  .ring__bounty[data-owner="gpt"] {
+    --side: var(--gpt);
+  }
+
+  .ring__belt {
+    position: absolute;
+    inset: 12%;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    color: rgb(255 255 255 / 0.75);
+    background:
+      repeating-linear-gradient(90deg, rgb(255 255 255 / 0.1) 0 5px, transparent 5px 12px) 0 0 /
+      24px 100%;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16);
+    rotate: var(--belt-turn);
+    animation:
+      ring-reveal 0.45s var(--ease-back) both,
+      ring-belt 0.5s linear infinite;
+  }
+
+  .ring__trap {
+    position: absolute;
+    inset: 15%;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--trap);
+    background: radial-gradient(circle, #1e0907 0 54%, transparent 56%);
+    box-shadow:
+      inset 0 0 0 2px var(--trap),
+      0 0 22px color-mix(in oklab, var(--trap) 45%, transparent);
+    animation: ring-reveal 0.45s var(--ease-back) both;
+  }
+
+  .ring__pillar {
+    position: absolute;
+    inset: 13%;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #30343d, #1c1f25);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.12),
+      0 7px 0 #0b0c0f,
+      0 12px 18px -6px rgb(0 0 0 / 0.8);
+  }
+
+  /* Fighters */
+
+  .ring__shadow {
+    position: absolute;
+    width: calc(100% / var(--cols) * 0.72);
+    aspect-ratio: 2.2;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(0 0 0 / 0.6), transparent);
+    translate: -50% -32%;
+    pointer-events: none;
+  }
+
+  .ring__fighter {
+    position: absolute;
+    width: calc(100% / var(--cols) * 0.84);
+    aspect-ratio: 1;
+    transform: translate(-50%, -88%) rotateX(calc(-1 * var(--tilt)));
+    transform-origin: 50% 100%;
+    pointer-events: none;
+  }
+
+  .ring__fighter[data-fighter="claude"] {
+    --side: var(--claude);
+  }
+  .ring__fighter[data-fighter="gpt"] {
+    --side: var(--gpt);
+  }
+
+  .ring__fighter[data-glide],
+  .ring__shadow[data-glide] {
+    transition:
+      left 0.8s var(--ease-out),
+      top 0.8s var(--ease-out);
+  }
+
+  .ring__body {
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 100%;
+    filter: drop-shadow(0 0 16px color-mix(in oklab, var(--side) 35%, transparent));
+    transition:
+      scale 0.16s var(--ease-out),
+      rotate 0.35s var(--ease-out),
+      translate 0.35s var(--ease-out);
+    animation: ring-breathe 2.6s ease-in-out infinite;
+  }
+
+  .ring__fighter[data-mood="think"] .ring__body {
+    animation: ring-bob 0.9s ease-in-out infinite;
+  }
+  .ring__fighter[data-mood="locked"] .ring__body {
+    scale: 1.05 0.95;
+    animation: none;
+  }
+  .ring__fighter[data-mood="hit"] .ring__body {
+    scale: 1.16 0.82;
+    animation: none;
+  }
+  .ring__fighter[data-mood="down"] .ring__body {
+    scale: 1.2 0.6;
+    animation: none;
+  }
+  .ring__fighter[data-mood="ko"] .ring__body {
+    rotate: -82deg;
+    translate: -12% 6%;
+    animation: none;
+  }
+  .ring__fighter[data-mood="happy"] .ring__body {
+    animation: ring-hop 0.5s var(--ease-out) 3;
+  }
+
+  .ring__badge {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    color: var(--side);
+    background: var(--bg-float);
+    box-shadow:
+      inset 0 0 0 1.5px color-mix(in oklab, var(--side) 60%, transparent),
+      0 6px 16px -6px rgb(0 0 0 / 0.8);
+    translate: -50% -4px;
+    animation: cast-badge 0.28s var(--ease-back) both;
+  }
+
+  .ring__count {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 1px;
+    height: 30px;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 700;
+    text-shadow: 0 2px 12px rgb(0 0 0 / 0.9);
+  }
+
+  .ring__count b {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    translate: -50% 0;
+    opacity: 0;
+    animation: ring-count 0.43s var(--ease-out) both;
+  }
+
+  .ring__count b:nth-child(2) {
+    animation-delay: 0.43s;
+  }
+  .ring__count b:nth-child(3) {
+    animation-delay: 0.86s;
+  }
+
+  /* Sits above the score pops, which rise from the head into the first 30px. */
+  .ring__say {
+    position: absolute;
+    bottom: calc(100% + 36px);
+    left: 50%;
+    padding: 5px 11px;
+    border-radius: 12px;
+    color: var(--ink);
+    background: #f6f3ec;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px -8px rgb(0 0 0 / 0.8);
+    translate: -50% 0;
+    animation: ring-say 2s var(--ease-out) both;
+  }
+
+  .ring__say::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border: 6px solid transparent;
+    border-top-color: #f6f3ec;
+    translate: -50% 0;
+  }
+
+  .ring__pop {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    color: var(--side);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-shadow: 0 2px 10px rgb(0 0 0 / 0.95);
+    translate: -50% 0;
+    animation: ring-pop 1.25s var(--ease-out) both;
+  }
+
+  .ring__pop[data-tone="loss"] {
+    color: var(--trap);
+  }
+
+  .ring__pop[data-tone="quiet"] {
+    color: var(--text-2);
+    font-size: 12px;
+  }
+
+  .ring__spark {
+    position: absolute;
+    width: calc(100% / var(--cols) * 0.95);
+    aspect-ratio: 1;
+    transform: translate(-50%, -70%) rotateX(calc(-1 * var(--tilt)));
+    pointer-events: none;
+  }
+
+  .ring__spark svg {
+    width: 100%;
+    height: 100%;
+    animation: ring-spark 0.55s var(--ease-out) both;
+  }
+
+  .ring__spark line {
+    stroke: #ffe7a1;
+    stroke-width: 6;
+    stroke-linecap: round;
+  }
+
+  @keyframes ring-splat {
+    from {
+      scale: 0.15;
+      opacity: 0;
+    }
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+
+  @keyframes ring-reveal {
+    from {
+      scale: 0.3;
+      opacity: 0;
+    }
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+
+  @keyframes ring-belt {
+    to {
+      background-position-x: 24px;
+    }
+  }
+
+  @keyframes ring-breathe {
+    50% {
+      scale: 1.02 0.98;
+    }
+  }
+
+  @keyframes ring-bob {
+    50% {
+      translate: 0 -4%;
+    }
+  }
+
+  @keyframes ring-hop {
+    40% {
+      translate: 0 -16%;
+      scale: 0.96 1.06;
+    }
+    80% {
+      translate: 0 0;
+      scale: 1.06 0.94;
+    }
+  }
+
+  @keyframes ring-count {
+    0% {
+      opacity: 0;
+      scale: 1.8;
+    }
+    30%,
+    80% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+      scale: 0.9;
+    }
+  }
+
+  @keyframes ring-say {
+    0% {
+      opacity: 0;
+      scale: 0.6;
+    }
+    12%,
+    82% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+      scale: 1;
+    }
+  }
+
+  @keyframes ring-pop {
+    0% {
+      opacity: 0;
+      translate: -50% 10px;
+      scale: 0.7;
+    }
+    15% {
+      opacity: 1;
+      translate: -50% -6px;
+      scale: 1.1;
+    }
+    75% {
+      opacity: 1;
+      translate: -50% -20px;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+      translate: -50% -30px;
+    }
+  }
+
+  @keyframes ring-spark {
+    from {
+      opacity: 1;
+      scale: 0.3;
+    }
+    to {
+      opacity: 0;
+      scale: 1.3;
+    }
+  }
+}

@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "round": "bluff",
+  "id": "2026-10-23-haiku-vs-luna-2",
+  "playedAt": "2026-10-23T10:24:50.463Z",
+  "models": {
+    "claude": {
+      "name": "Claude Haiku 5.5",
+      "id": "claude-haiku-5-5"
+    },
+    "gpt": {
+      "name": "GPT-6 Luna",
+      "id": "gpt-6-luna"
+    }
+  },
+  "effort": {
+    "claude": "low",
+    "gpt": "low"
+  },
+  "limits": {
+    "hands": 8,
+    "shotClockMs": 60000,
+    "callsPerCorner": 30,
+    "roundMs": 1800000
+  },
+  "seed": 119011228,
+  "prompt": 2,
+  "left": "gpt",
+  "hands": [
+    {
+      "question": {
+        "text": "How many days after 18 December 1982 is 5 June 1987?",
+        "answer": "1630"
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "1630",
+          "confidence": 90,
+          "think": "Four years from 18 Dec 1982 to 18 Dec 1986 includes one leap day (1984): 1461 days. Then 18 Dec 1986 to 5 Jun 1987 is 169 days. Total 1630.",
+          "ruling": "played",
+          "seconds": 6.3,
+          "calls": 1,
+          "reasoning": "Counting the days between December 18, 1982 and June 5, 1987, I calculate 1461 days for the four-year span to December 18, 1986 (accounting for the 1984 leap day), then add the remaining days from December 18, 1986 through June 5, 1987 month by month.\n\nTotal: 1461+169 = 1630 days, with fairly high confidence given the straightforward arithmetic, around 90.\n\n"
+        },
+        "gpt": {
+          "answer": "1630",
+          "confidence": 99,
+          "think": "Count the elapsed days between the dates, accounting for leap years 1984 and 1988 (1988 is after the end date).",
+          "ruling": "played",
+          "seconds": 7.8,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "1630",
+            "bet": 20
+          },
+          "think": "The exact date difference is 1,630 days. I’m highly confident, so I’m pressing the maximum.",
+          "say": "Count it, Claude.",
+          "ruling": "played",
+          "seconds": 6.3,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "fold"
+          },
+          "think": "Counted 1461 days for the four years including leap day 1984, plus 169 days to 5 June 1987. GPT is right, so calling only pays them. Fold.",
+          "ruling": "played",
+          "seconds": 7.2,
+          "calls": 1,
+          "reasoning": "I'm counting the days between December 18, 1982 and June 5, 1987, working through each year span and accounting for the 1984 leap day, then adding the remaining months of late 1986 into 1987.\n\nTotaling everything up gives 1630 days, matching GPT's claim. Since we'd arrive at the same answer, calling just hands them more of the pot for no benefit — folding only costs the ante, so that's the better move here.\n\n"
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the 49th digit of pi after the decimal point?",
+        "answer": "1"
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "1",
+          "confidence": 95,
+          "think": "Memorized pi digits: 3.14159265358979323846264338327950288419716939937510. Counting past the decimal point, position 49 is 1.",
+          "ruling": "played",
+          "seconds": 5.7,
+          "calls": 1,
+          "reasoning": "I'm listing out the digits of pi after the decimal point one by one to index them precisely.\n\n"
+        },
+        "gpt": {
+          "answer": "4",
+          "confidence": 74,
+          "think": "Pi begins 3.14159265358979323846264338327950288419716939937510; counting decimal places makes the 49th digit 4.",
+          "ruling": "played",
+          "seconds": 6.5,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "1",
+            "bet": 10
+          },
+          "think": "Digits of pi: the 49th decimal digit is 1. Confident in this one, so I'm betting it.",
+          "say": "Your move, GPT. Fold or call.",
+          "ruling": "played",
+          "seconds": 7.5,
+          "calls": 1,
+          "reasoning": "I'm being asked to respond with just JSON for this poker game, settling on \"1\" as my answer with high confidence, and casually recalling the digits of pi as a side thought.\n\nWith pot at 4 and my chips at 56, I'll claim \"1\" and bet moderately, around 10, enough to pressure without overcommitting since I'm confident in the claim. I need to keep my response short, just a few words.\n\n"
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "counter",
+            "answer": "4",
+            "raise": 20
+          },
+          "think": "I’m confident the 49th digit is 4. Countering puts the claim to a showdown and gives me the best chance to win the pot.",
+          "say": "Let’s see the digits.",
+          "ruling": "played",
+          "seconds": 6.8,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "call"
+          },
+          "think": "Pi's 49th decimal digit is 1: the digits run 1415926535 8979323846 2643383279 5028841971 6939937510, so 49 falls on the 1 at the start of the fifth group. GPT's 4 is wrong.",
+          "say": "Checked the digits. Pay up.",
+          "ruling": "played",
+          "seconds": 7.5,
+          "calls": 1,
+          "reasoning": "I'm counting out the digits of pi one by one after the decimal point to track their exact positions.\n\nFinishing the count confirms the 49th digit is 1, matching our claimed answer, so since GPT countered with \"4\" and raised 20, I'll call — we have 46 chips to GPT's 30, so calling costs us 20. For the response format, since this is a call rather than a counter, I'll leave the answer field empty and set amount to 0.\n\n"
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the capital of Turkmenistan?",
+        "answer": "Ashgabat",
+        "accept": ["Ashkhabad"]
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "Ashgabat",
+          "confidence": 97,
+          "think": "Turkmenistan's capital has been Ashgabat since independence; it is a well-established geographic fact, so I'm very confident here.",
+          "ruling": "played",
+          "seconds": 3.4,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "Ashgabat",
+          "confidence": 99,
+          "think": "Turkmenistan’s capital is Ashgabat.",
+          "ruling": "played",
+          "seconds": 9.4,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "Ashgabat",
+            "bet": 20
+          },
+          "think": "I’m 99% sure. A maximum bet pressures Claude to risk chips calling a straightforward, verifiable fact.",
+          "say": "Name a better capital.",
+          "ruling": "played",
+          "seconds": 7.6,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "fold"
+          },
+          "think": "Ashgabat is the capital of Turkmenistan, so GPT's claim is right. Calling only pays GPT more. Folding loses just the ante.",
+          "ruling": "played",
+          "seconds": 6.8,
+          "calls": 1,
+          "reasoning": "I'm fairly confident Ashgabat is correct, around 97%. If I call and it's right, I lose more chips to GPT; if I fold, I only sacrifice my ante. Since there's no better alternative answer to counter with, folding seems like the safer play to minimize my loss.\n\n"
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "How many chemical elements have a symbol that starts with the letter C?",
+        "answer": "12"
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "12",
+          "confidence": 90,
+          "think": "Symbols starting with C: C, Ca, Cd, Ce, Cf, Cl, Cm, Cn, Co, Cr, Cs, Cu. Counted from the periodic table of 118 elements.",
+          "ruling": "played",
+          "seconds": 6,
+          "calls": 1,
+          "reasoning": "I'm counting elements whose symbol starts with C: carbon, calcium, cadmium, cerium, californium, chlorine, curium, copernicium, cobalt, chromium, cesium, and copper — that comes to 12.\n\n"
+        },
+        "gpt": {
+          "answer": "11",
+          "confidence": 94,
+          "think": "Carbon, calcium, cadmium, cerium, cesium, chlorine, chromium, cobalt, copper, curium, and copernicium.",
+          "ruling": "played",
+          "seconds": 7,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "12",
+            "bet": 10
+          },
+          "think": "Symbols starting with C: C, Ca, Cd, Ce, Cf, Cl, Cm, Cn, Co, Cr, Cs, Cu. That's 12. Confident, so bet to build the pot.",
+          "say": "Twelve symbols. Call it if you dare.",
+          "ruling": "played",
+          "seconds": 4.8,
+          "calls": 1,
+          "reasoning": "Counting elements starting with C: C, Ca, Cd, Ce, Cf, Cl, Cm, Cn, Co, Cr, Cs, Cu — that's 12. I'll claim 12 with decent confidence and place a modest bet.\n\n"
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "counter",
+            "answer": "11",
+            "raise": 18
+          },
+          "think": "C, Ca, Cd, Ce, Cf, Cl, Cm, Cn, Cr, Cs, Cu: 11. Claude’s 12 looks wrong.",
+          "say": "Count the symbols, Claude.",
+          "ruling": "played",
+          "seconds": 7.5,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "call"
+          },
+          "think": "Twelve symbols start with C: C, Ca, Cd, Ce, Cf, Cl, Cm, Cn, Co, Cr, Cs, Cu. GPT's 11 is wrong. Calling.",
+          "say": "Count again, GPT. Twelve.",
+          "ruling": "played",
+          "seconds": 6.3,
+          "calls": 1,
+          "reasoning": "I'm listing out elements whose symbols start with C: Carbon, Calcium, Cadmium, Cerium, Californium, Chlorine, Curium, Copernicium, Cobalt, Chromium, and more, counting up to 12 so far.\n\nI'm confident 12 is correct, so I'll call the bet since GPT's claim of 11 looks wrong -- winning this pot. For the response, I'll leave the answer field empty since it's a call, with amount 0.\n\n"
+        }
+      ]
+    }
+  ],
+  "end": {
+    "reason": "ko",
+    "winner": "claude",
+    "stacks": {
+      "claude": 120,
+      "gpt": 0
+    }
+  },
+  "calls": {
+    "claude": 10,
+    "gpt": 8
+  },
+  "seconds": 99
+}

@@ -1,0 +1,312 @@
+/* Mirror: two mirrored ARC boards with their garbage stacks, and attacks flying between them. The
+   broadcast frame around it lives in cast.css; grid cells come from forge.css. */
+@layer components {
+  .mirror__boards {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(12px, 2.4cqw, 32px);
+    width: min(100cqw, 200cqh);
+  }
+
+  .mirror__board {
+    display: grid;
+    gap: 10px;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid var(--hairline-2);
+    border-top: 2px solid var(--side);
+    border-radius: 12px;
+    background: rgb(12 13 15 / 0.7);
+    transition:
+      box-shadow var(--t-3) var(--ease),
+      filter var(--t-3) var(--ease);
+  }
+
+  .mirror__board[data-ko] {
+    box-shadow: inset 0 0 0 2px var(--trap);
+    filter: saturate(0.5);
+  }
+
+  .mirror__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mirror__board[data-side="right"] .mirror__head {
+    flex-direction: row-reverse;
+  }
+
+  .mirror__face {
+    flex: none;
+    width: 44px;
+    height: 44px;
+  }
+
+  .mirror__garbage {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    min-height: 28px;
+  }
+
+  .mirror__board[data-side="right"] .mirror__garbage {
+    justify-content: flex-end;
+  }
+
+  .mirror__stacked {
+    animation: cast-badge 0.35s var(--ease-back) both;
+  }
+
+  .mirror__stacked .chip {
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--trap) 55%, transparent);
+  }
+
+  .mirror__slot {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 1px var(--hairline-2);
+  }
+
+  .mirror__clean {
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .mirror__puzzle {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    animation: cast-line 0.4s var(--ease-out) both;
+  }
+
+  .mirror__examples {
+    display: grid;
+    gap: 6px;
+    padding-right: 12px;
+    border-right: 1px solid var(--hairline);
+  }
+
+  .mirror__pair,
+  .mirror__test {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-3);
+  }
+
+  /* Test above answer, so both can be big. */
+  .mirror__test {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mirror__tag {
+    flex-basis: 100%;
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .mirror__answer {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+  }
+
+  .mirror__blank {
+    display: grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    border: 1px dashed var(--hairline-3);
+    border-radius: 6px;
+    color: var(--text-3);
+    font-size: 22px;
+  }
+
+  .mirror__verdict {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    color: #0b0c0e;
+    background: var(--negative);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    animation: cast-badge 0.35s var(--ease-back) both;
+  }
+
+  .mirror__verdict[data-right] {
+    background: var(--positive);
+  }
+
+  .mirror__rule {
+    display: grid;
+    gap: 6px;
+    animation: cast-line 0.3s var(--ease-out) both;
+  }
+
+  /* An attack flying across to the other board, or stopped dead by the referee. */
+  .mirror__flight {
+    position: absolute;
+    top: 46%;
+    z-index: 3;
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    translate: -50% -50%;
+    pointer-events: none;
+  }
+
+  .mirror__flight .chip {
+    box-shadow:
+      0 0 0 2px var(--side),
+      0 0 24px var(--side);
+    background: #0c0d10;
+  }
+
+  .mirror__flight[data-from="left"] {
+    animation: mirror-fly-right 0.95s var(--ease-out) both;
+  }
+
+  .mirror__flight[data-from="right"] {
+    animation: mirror-fly-left 0.95s var(--ease-out) both;
+  }
+
+  .mirror__flight[data-blocked][data-from="left"] {
+    animation: mirror-blocked-right 0.9s var(--ease-out) both;
+  }
+
+  .mirror__flight[data-blocked][data-from="right"] {
+    animation: mirror-blocked-left 0.9s var(--ease-out) both;
+  }
+
+  .mirror__blocked {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: #0b0c0e;
+    background: var(--trap);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    animation: cast-badge 0.3s var(--ease-back) 0.6s both;
+  }
+
+  .mirror__loading {
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 960px) {
+    .mirror__puzzle {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mirror__examples {
+      grid-auto-flow: column;
+      justify-content: center;
+      padding: 0 0 8px;
+      border-right: 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+  }
+
+  @keyframes mirror-fly-right {
+    from {
+      left: 25%;
+      opacity: 0;
+      scale: 0.6;
+    }
+    20% {
+      opacity: 1;
+      scale: 1.1;
+    }
+    to {
+      left: 75%;
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes mirror-fly-left {
+    from {
+      left: 75%;
+      opacity: 0;
+      scale: 0.6;
+    }
+    20% {
+      opacity: 1;
+      scale: 1.1;
+    }
+    to {
+      left: 25%;
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes mirror-blocked-right {
+    from {
+      left: 25%;
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    60% {
+      left: 50%;
+      rotate: 0deg;
+    }
+    75% {
+      left: 47%;
+      rotate: -8deg;
+    }
+    to {
+      left: 50%;
+      rotate: 0deg;
+    }
+  }
+
+  @keyframes mirror-blocked-left {
+    from {
+      left: 75%;
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    60% {
+      left: 50%;
+      rotate: 0deg;
+    }
+    75% {
+      left: 53%;
+      rotate: 8deg;
+    }
+    to {
+      left: 50%;
+      rotate: 0deg;
+    }
+  }
+}

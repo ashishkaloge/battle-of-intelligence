@@ -1,0 +1,463 @@
+{
+  "version": 1,
+  "round": "bluff",
+  "id": "2026-10-23-haiku-vs-luna",
+  "playedAt": "2026-10-23T10:19:10.473Z",
+  "models": {
+    "claude": {
+      "name": "Claude Haiku 5.5",
+      "id": "claude-haiku-5-5"
+    },
+    "gpt": {
+      "name": "GPT-6 Luna",
+      "id": "gpt-6-luna"
+    }
+  },
+  "effort": {
+    "claude": "low",
+    "gpt": "low"
+  },
+  "limits": {
+    "hands": 8,
+    "shotClockMs": 60000,
+    "callsPerCorner": 30,
+    "roundMs": 1800000
+  },
+  "seed": 1384746886,
+  "prompt": 1,
+  "left": "claude",
+  "hands": [
+    {
+      "question": {
+        "text": "What is the smallest prime number greater than 13,000?",
+        "answer": "13001"
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "13001",
+          "confidence": 85,
+          "think": "13001 isn't divisible by any prime up to its square root, about 114. Checked 2, 3, 5, 7, 11, 13 and the rest. 13000 is composite, so 13001 is the first prime above it.",
+          "ruling": "played",
+          "seconds": 5.6,
+          "calls": 1,
+          "reasoning": "I'm checking 13001 for primality by testing divisibility against small primes one by one, so far ruling out 3, 7, 11, 13, 17, and 19.\n\n"
+        },
+        "gpt": {
+          "answer": "13001",
+          "confidence": 95,
+          "think": "13,000 is even; checking odd candidates, 13,001 has no prime divisor up to its square root (about 114), so it is prime.",
+          "ruling": "played",
+          "seconds": 6.6,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "13001",
+            "bet": 10
+          },
+          "think": "13001 is prime: no prime factor up to 113. 13000 is even, so 13001 is the smallest prime above it.",
+          "say": "Trust the primes, GPT.",
+          "ruling": "played",
+          "seconds": 6.6,
+          "calls": 1,
+          "reasoning": "I'm checking whether 13001 is prime by testing division against small primes up to its square root, working through 7, 11, 13, 17, 19, 23, 29 so far with no even divisors found.\n\n"
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "call"
+          },
+          "think": "13001 is prime: it is not divisible by any prime up to its square root, about 114.",
+          "say": "Let’s see the showdown.",
+          "ruling": "played",
+          "seconds": 7.3,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "Which element has atomic number 33?",
+        "answer": "Arsenic"
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "Arsenic",
+          "confidence": 95,
+          "think": "Atomic number 33 is arsenic (As), a metalloid in group 15, period 4, between germanium and selenium on the periodic table.",
+          "ruling": "played",
+          "seconds": 3.1,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "Arsenic",
+          "confidence": 100,
+          "think": "Atomic number 33 is arsenic (As) on the periodic table.",
+          "ruling": "played",
+          "seconds": 6.6,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "Arsenic",
+            "bet": 10
+          },
+          "think": "Atomic number 33 is arsenic. I’m certain, and an early confident claim puts pressure on Claude.",
+          "say": "Your move, Claude.",
+          "ruling": "played",
+          "seconds": 7.1,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "call"
+          },
+          "think": "Atomic number 33 is arsenic, a standard periodic-table fact. GPT and I agree, so calling wins the pot if we're both right.",
+          "say": "Right answer, let's see it.",
+          "ruling": "played",
+          "seconds": 4.8,
+          "calls": 1,
+          "reasoning": "Element 33 is arsenic, which matches GPT's claim, so I'm confident at 95%. Calling the 10-chip bet is clearly worth it given the pot size.\n\n"
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "Which element has the chemical symbol W?",
+        "answer": "Tungsten"
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "Tungsten",
+          "confidence": 97,
+          "think": "W is the chemical symbol for tungsten, from its German name Wolfram; atomic number 74.",
+          "ruling": "played",
+          "seconds": 3.7,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "Tungsten",
+          "confidence": 100,
+          "think": "W is tungsten’s chemical symbol, from its German name Wolfram.",
+          "ruling": "played",
+          "seconds": 6.2,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "Tungsten",
+            "bet": 10
+          },
+          "think": "Chemical symbol W comes from wolfram, the old name for tungsten. Very confident this is correct.",
+          "say": "Tungsten. Your move, GPT.",
+          "ruling": "played",
+          "seconds": 4.3,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "call"
+          },
+          "think": "W is tungsten’s chemical symbol. I’m certain, and Claude has claimed the correct answer.",
+          "say": "Good claim. I’ll take it.",
+          "ruling": "played",
+          "seconds": 8.6,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "On what day of the week did 19 March 1910 fall?",
+        "answer": "Saturday",
+        "accept": ["Sat"]
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "Saturday",
+          "confidence": 85,
+          "think": "Jan 1 1910 was a Saturday. Jan plus Feb is 59 days, plus 18 more reaches 19 March: 77 days, a multiple of 7. Same weekday.",
+          "ruling": "played",
+          "seconds": 6.3,
+          "calls": 1,
+          "reasoning": "Computing the day of week for March 19, 1910: starting from Saturday, January 1, the span of 77 days to March 19 is divisible by 7, so March 19 also falls on a Saturday.\n\n"
+        },
+        "gpt": {
+          "answer": "Saturday",
+          "confidence": 99,
+          "think": "1 January 1910 was Saturday; 19 March is 77 days later, exactly 11 weeks, so also Saturday.",
+          "ruling": "played",
+          "seconds": 6.6,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "Saturday",
+            "bet": 12
+          },
+          "think": "March 19, 1910 was Saturday; confident enough to build the pot while keeping room to respond.",
+          "say": "Your move, Claude.",
+          "ruling": "played",
+          "seconds": 7,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "call"
+          },
+          "think": "Jan 1 1910 was a Saturday; 77 days later is still Saturday. GPT is right, so calling splits the pot instead of giving it away.",
+          "say": "Good call, GPT. Let's see it.",
+          "ruling": "played",
+          "seconds": 7.3,
+          "calls": 1,
+          "reasoning": "Working out the day of week for 19 March 1910: since 1 January 1910 was a Saturday, counting 77 days forward (59 to reach March 1, plus 18 more) lands exactly on a multiple of 7, confirming 19 March 1910 falls on a Saturday as well.\n\nSince my answer matches the other claim, calling is the better move than folding — both being right means splitting the pot, which beats giving it away entirely, so I'll call rather than counter with a wrong guess.\n\n"
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the atomic number of einsteinium?",
+        "answer": "99"
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "99",
+          "confidence": 90,
+          "think": "Einsteinium is element 99, a actinide named after Albert Einstein; I'm confident in its standard atomic number.",
+          "ruling": "played",
+          "seconds": 3.8,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "99",
+          "confidence": 100,
+          "think": "Einsteinium is element 99 on the periodic table.",
+          "ruling": "played",
+          "seconds": 7.1,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "99",
+            "bet": 10
+          },
+          "think": "Einsteinium is element 99, named after Albert Einstein. I'm highly confident, so a solid bet makes sense.",
+          "say": "Easy one, GPT. Your move.",
+          "ruling": "played",
+          "seconds": 4.3,
+          "calls": 1,
+          "reasoning": "I'm confident einsteinium's atomic number is 99, so I'll claim that and bet around 10 from the pot, with a short taunt to go along with it.\n\n"
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "call"
+          },
+          "think": "Einsteinium is element 99. Claude’s claim matches my certain answer, so calling locks in a correct showdown.",
+          "say": "Right again, Claude.",
+          "ruling": "played",
+          "seconds": 7.3,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the SI unit of equivalent dose of ionising radiation?",
+        "answer": "sievert",
+        "accept": ["Sv"]
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "Sievert",
+          "confidence": 97,
+          "think": "SI unit of equivalent dose is the sievert (Sv), named after Rolf Sievert; equals one joule per kilogram, weighted for radiation type.",
+          "ruling": "played",
+          "seconds": 3.2,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "Sievert",
+          "confidence": 100,
+          "think": "Equivalent dose is measured in sieverts (Sv), the SI unit accounting for biological effect of ionising radiation.",
+          "ruling": "played",
+          "seconds": 6.3,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "Sievert",
+            "bet": 20
+          },
+          "think": "The sievert measures radiation dose weighted for biological effect; my answer is certain, and a maximum bet makes the lead harder to recover.",
+          "say": "Your move, Claude.",
+          "ruling": "played",
+          "seconds": 7.8,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "call"
+          },
+          "think": "Sievert is the SI unit of equivalent dose. GPT's claim matches my own answer, which I'm 97% sure of, so calling wins the pot at showdown.",
+          "say": "Nice bluff, but it's true.",
+          "ruling": "played",
+          "seconds": 4.6,
+          "calls": 1,
+          "reasoning": "Sievert is indeed the SI unit for equivalent dose, confirming GPT's answer is correct, so calling the 20 bet is right since I'll win the pot.\n\n"
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the capital of Burkina Faso?",
+        "answer": "Ouagadougou"
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "Ouagadougou",
+          "confidence": 96,
+          "think": "Burkina Faso's capital is Ouagadougou, a well-known fact about West African capitals. Spelling is standard; I'm very confident of the name.",
+          "ruling": "played",
+          "seconds": 3.5,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "Ouagadougou",
+          "confidence": 100,
+          "think": "Ouagadougou is the capital and largest city of Burkina Faso.",
+          "ruling": "played",
+          "seconds": 6.5,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "Ouagadougou",
+            "bet": 20
+          },
+          "think": "Burkina Faso's capital is well established and I'm 96% sure. Betting high to take the pot and build a lead before the final hand.",
+          "say": "Your move, GPT. Cover this or fold.",
+          "ruling": "played",
+          "seconds": 3.4,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "call"
+          },
+          "think": "Claude named the correct capital. Calling guarantees the showdown; my answer is certain.",
+          "say": "Show me the capital.",
+          "ruling": "played",
+          "seconds": 7.7,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the smallest prime number greater than 15,500?",
+        "answer": "15511"
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "15511",
+          "confidence": 85,
+          "think": "Checked odd candidates above 15500: 15501, 15507 divisible by 3; 15503=37×419; 15509=13×1193; 15511 has no prime factor up to √15511≈124.",
+          "ruling": "played",
+          "seconds": 8.2,
+          "calls": 1,
+          "reasoning": "I'm testing divisibility of 15503 by small primes, checking 7, 11, 13, 17, 19, 23, and 29 to see if any divide it evenly.\n\nFound it: 15503 = 37×419, so it's composite. Moving to 15507 (divisible by 3) and 15509 (divisible by 13, equals 13×1193), both composite. Now checking 15511 against primes up to 73, and so far none divide evenly—still working through this candidate.\n\n"
+        },
+        "gpt": {
+          "answer": "15511",
+          "confidence": 96,
+          "think": "Check odd candidates after 15500: 15501 and 15503 are composite; 15511 has no prime divisor up to 124.",
+          "ruling": "played",
+          "seconds": 6.9,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "15511",
+            "bet": 20
+          },
+          "think": "15511 is prime, and no smaller prime exceeds 15500. With 96% confidence and a 12-chip pot, press the edge.",
+          "say": "Check the math, Claude.",
+          "ruling": "played",
+          "seconds": 7.1,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "call"
+          },
+          "think": "15503, 15507 and 15509 are composite. 15511 has no factor up to its square root, so it is prime. Both answers match, so the pot splits.",
+          "say": "Great minds think alike, GPT.",
+          "ruling": "played",
+          "seconds": 11.3,
+          "calls": 1,
+          "reasoning": "I'm testing divisibility of 15503 by small primes one by one, checking 7, 11, 13, 17, 19, 23, and now moving on to 29.\n\n37 turns out to divide 15503 exactly (37×419), so that's composite. I move to 15509, quickly ruling out division by 3, 7, and 11, but 13×1193=15509 confirms it's composite too. Now I'm grinding through 15511, testing it against 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, and 71 without finding an exact divisor yet.\n\nContinuing through 73, 79, 83, 89, 97, 101, 103, 107, 109, and 113 — none divide 15511 evenly, and since the square root is about 124.5, I've c"
+        }
+      ]
+    }
+  ],
+  "end": {
+    "reason": "hands",
+    "winner": "gpt",
+    "stacks": {
+      "claude": 46,
+      "gpt": 74
+    }
+  },
+  "calls": {
+    "claude": 16,
+    "gpt": 16
+  },
+  "seconds": 161
+}

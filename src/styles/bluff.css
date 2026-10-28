@@ -1,0 +1,442 @@
+/* Bluff: the poker table, the hole-camera strips, the truth card and the calibration chart. The
+   broadcast frame around it lives in cast.css. */
+@layer components {
+  .bluff {
+    --felt: #0f241c;
+    --gold: #e9c46a;
+  }
+
+  /* The table */
+
+  .bluff__table {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr);
+    align-items: center;
+    width: min(100cqw, 190cqh);
+    height: min(100cqh, 54cqw);
+    padding: 0 3%;
+  }
+
+  .bluff__felt {
+    position: absolute;
+    inset: 6% 0;
+    z-index: -1;
+    border-radius: 999px;
+    background:
+      radial-gradient(60% 70% at 50% 45%, rgb(255 255 255 / 0.06), transparent 70%),
+      radial-gradient(ellipse at center, #143327, var(--felt));
+    box-shadow:
+      inset 0 0 0 2px rgb(255 255 255 / 0.06),
+      inset 0 0 60px rgb(0 0 0 / 0.55),
+      0 0 0 12px #17110b,
+      0 0 0 13px rgb(233 196 106 / 0.18),
+      0 40px 80px -24px rgb(0 0 0 / 0.9);
+  }
+
+  .bluff__seat {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    align-content: center;
+  }
+
+  /* Every piece sits on the one row; without it, auto-placement wraps the middle to a new row. */
+  .bluff__seat[data-side="left"] {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .bluff__seat[data-side="right"] {
+    grid-row: 1;
+    grid-column: 3;
+  }
+
+  .bluff__face {
+    position: relative;
+    width: clamp(64px, 11cqw, 110px);
+    aspect-ratio: 1;
+    filter: drop-shadow(0 0 18px color-mix(in oklab, var(--side) 35%, transparent));
+    transition: scale 0.3s var(--ease-back);
+  }
+
+  .bluff__seat[data-win] .bluff__face {
+    scale: 1.08;
+    filter: drop-shadow(0 0 26px var(--side));
+  }
+
+  .bluff__say {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    padding: 5px 11px;
+    border-radius: 12px;
+    color: var(--ink);
+    background: #f6f3ec;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    translate: -50% 0;
+    animation: bluff-say 2.2s var(--ease-out) both;
+  }
+
+  .bluff__stack {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bluff__stack .num {
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    transition: color var(--t-3) var(--ease);
+  }
+
+  .bluff__chips {
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+  }
+
+  .bluff__chips i {
+    position: absolute;
+    left: 0;
+    bottom: calc(var(--i) * 3px);
+    width: 22px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow:
+      inset 0 -2px 0 rgb(0 0 0 / 0.3),
+      0 1px 0 rgb(0 0 0 / 0.5);
+  }
+
+  .bluff__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    color: var(--side);
+    background: rgb(10 11 13 / 0.75);
+    box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--side) 60%, transparent);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    animation: cast-badge 0.32s var(--ease-back) both;
+  }
+
+  .bluff__action:is([data-kind="fold"], [data-kind="pass"]) {
+    color: var(--text-2);
+    box-shadow: inset 0 0 0 1px var(--hairline-3);
+  }
+
+  .bluff__action i {
+    display: inline-grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #0b0c0e;
+    background: var(--negative);
+    animation: cast-badge 0.35s var(--ease-back) both;
+  }
+
+  .bluff__action i[data-right] {
+    background: var(--positive);
+  }
+
+  /* The hole camera: what only viewers can see. */
+
+  .bluff__hole {
+    display: grid;
+    justify-items: center;
+    gap: 3px;
+    min-width: 128px;
+    padding: 7px 12px 8px;
+    border: 1px dashed color-mix(in oklab, var(--gold) 45%, transparent);
+    border-radius: 10px;
+    background: rgb(8 9 10 / 0.6);
+    animation: cast-line 0.35s var(--ease-out) both;
+  }
+
+  .bluff__hole-tag,
+  .bluff__truth span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .bluff__hole strong {
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 650;
+  }
+
+  .bluff__sure {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text-2);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .bluff__dots {
+    display: inline-flex;
+    gap: 2px;
+  }
+
+  .bluff__dots i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--hairline-3);
+  }
+
+  .bluff__dots i[data-on] {
+    background: var(--side);
+  }
+
+  /* The middle of the table */
+
+  .bluff__middle {
+    grid-row: 1;
+    grid-column: 2;
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .bluff__question {
+    max-width: 30ch;
+    padding: 14px 18px;
+    border-radius: 12px;
+    color: #15120f;
+    background: #f4efe4;
+    box-shadow: 0 14px 30px -12px rgb(0 0 0 / 0.8);
+    font-size: clamp(14px, 1.7cqw, 19px);
+    font-weight: 650;
+    line-height: 1.35;
+    text-wrap: balance;
+    animation: bluff-deal 0.5s var(--ease-back) both;
+  }
+
+  .bluff__truth {
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+    padding: 6px 14px;
+    border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+    border-radius: 10px;
+    background: rgb(233 196 106 / 0.08);
+    animation: cast-line 0.4s var(--ease-out) 0.3s both;
+  }
+
+  .bluff__truth strong {
+    color: var(--gold);
+    font-size: 16px;
+  }
+
+  .bluff__pot {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bluff__pot[data-moving] {
+    animation: cast-badge 0.4s var(--ease-back) both;
+  }
+
+  /* Calibration */
+
+  .bluff__calibration {
+    display: grid;
+    gap: 12px;
+    width: min(100%, 560px);
+    padding: 18px 22px;
+    border: 1px solid var(--hairline-2);
+    border-radius: 16px;
+    background: rgb(11 12 14 / 0.75);
+    animation: cast-line 0.4s var(--ease-out) both;
+  }
+
+  .bluff__final {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--hairline);
+    text-align: center;
+  }
+
+  .bluff__cal-row {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+  }
+
+  .bluff__cal-row figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--text-2);
+    font-size: 13px;
+  }
+
+  .bluff__cal-name {
+    color: var(--text);
+    font-weight: 650;
+  }
+
+  .bluff__cal-row svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .bluff__grid {
+    stroke: var(--hairline-2);
+    stroke-width: 1;
+  }
+
+  .bluff__axis {
+    fill: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 9px;
+  }
+
+  .bluff__said {
+    stroke: var(--text-2);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 4;
+  }
+
+  .bluff__hit {
+    stroke: var(--side);
+    stroke-width: 2;
+  }
+
+  .bluff__point circle {
+    fill: var(--bg);
+    stroke: var(--side);
+    stroke-width: 2;
+  }
+
+  .bluff__point[data-right] circle {
+    fill: var(--side);
+  }
+
+  .bluff__point path {
+    fill: none;
+    stroke: var(--side);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+
+  .bluff__point[data-right] path {
+    stroke: #0b0c0e;
+  }
+
+  .bluff__cal-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    color: var(--text-3);
+    font-size: 11.5px;
+  }
+
+  .bluff__cal-key span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .bluff__cal-key span::before {
+    content: "";
+    display: inline-block;
+  }
+
+  .bluff__cal-key [data-kind="said"]::before {
+    width: 16px;
+    border-top: 1.5px dashed var(--text-2);
+  }
+  .bluff__cal-key [data-kind="hit"]::before {
+    width: 16px;
+    border-top: 2px solid var(--text);
+  }
+  .bluff__cal-key [data-kind="right"]::before {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text);
+  }
+  .bluff__cal-key [data-kind="wrong"]::before {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px var(--text);
+  }
+
+  @media (max-width: 960px) {
+    .bluff__table {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      height: auto;
+      row-gap: 14px;
+    }
+
+    .bluff__middle {
+      grid-column: 1 / -1;
+      grid-row: 1;
+    }
+
+    .bluff__seat[data-side="left"],
+    .bluff__seat[data-side="right"] {
+      grid-row: 2;
+    }
+
+    .bluff__felt {
+      inset: 0;
+      border-radius: 40px;
+    }
+  }
+
+  @keyframes bluff-deal {
+    from {
+      opacity: 0;
+      transform: perspective(500px) rotateY(-80deg) scale(0.8);
+    }
+  }
+
+  @keyframes bluff-say {
+    0% {
+      opacity: 0;
+      scale: 0.6;
+    }
+    12%,
+    82% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

@@ -1,0 +1,650 @@
+{
+  "version": 1,
+  "id": "broadcast-launch-2-ring",
+  "playedAt": "2026-10-28T09:38:18.126Z",
+  "models": {
+    "claude": {
+      "name": "Claude Sonnet 5.5",
+      "id": "claude-sonnet-5-5"
+    },
+    "gpt": {
+      "name": "GPT-6.1 Terra",
+      "id": "gpt-6.1-terra"
+    }
+  },
+  "effort": {
+    "claude": "medium",
+    "gpt": "medium"
+  },
+  "limits": {
+    "bouts": 3,
+    "turnsPerBout": 8,
+    "shotClockMs": 60000,
+    "callsPerCorner": 30,
+    "roundMs": 1800000
+  },
+  "arena": {
+    "name": "Crossroads",
+    "width": 9,
+    "height": 5,
+    "tiles": [
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "wall"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "trap"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "conveyor",
+        "dir": "right"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "conveyor",
+        "dir": "left"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "trap"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "wall"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      }
+    ],
+    "center": {
+      "x": 4,
+      "y": 2
+    },
+    "starts": {
+      "claude": {
+        "x": 0,
+        "y": 2
+      },
+      "gpt": {
+        "x": 8,
+        "y": 2
+      }
+    }
+  },
+  "rules": {
+    "centerBounty": true,
+    "ropeSlams": true,
+    "takedowns": true,
+    "changeCorners": true
+  },
+  "prompt": 3,
+  "opener": "gpt",
+  "bouts": [
+    [
+      {
+        "claude": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "Center's mine, GPT.",
+          "ruling": "played",
+          "seconds": 4.4,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "Race you to the centre.",
+          "ruling": "played",
+          "seconds": 9.9,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "Center's mine, come get it.",
+          "ruling": "played",
+          "seconds": 4,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "The centre is mine.",
+          "ruling": "played",
+          "seconds": 10.1,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "Center's mine, come get it.",
+          "ruling": "played",
+          "seconds": 13.9,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Catch me if you can.",
+          "ruling": "played",
+          "seconds": 12.5,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "Holds position.",
+          "say": "Center's mine. Come get it.",
+          "ruling": "played",
+          "seconds": 5.5,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "That bounty looks good on you.",
+          "ruling": "played",
+          "seconds": 8.6,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Get off my center.",
+          "ruling": "played",
+          "seconds": 7.4,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "down",
+          "think": "Moves down.",
+          "say": "That bounty looks good on me.",
+          "ruling": "played",
+          "seconds": 9.5,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Get out of my ring!",
+          "ruling": "played",
+          "seconds": 7.3,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "down",
+          "think": "Moves down.",
+          "say": "That bounty looks good on me.",
+          "ruling": "played",
+          "seconds": 12.3,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Bounce off again, GPT.",
+          "ruling": "played",
+          "seconds": 5.7,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "down",
+          "think": "Moves down.",
+          "say": "That bounty looks tempting.",
+          "ruling": "played",
+          "seconds": 11,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Still bouncing off me?",
+          "ruling": "played",
+          "seconds": 5.8,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "down",
+          "think": "Moves down.",
+          "say": "The centre isn't yours yet.",
+          "ruling": "played",
+          "seconds": 18.5,
+          "calls": 1
+        }
+      }
+    ],
+    [
+      {
+        "claude": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "Center's mine. Catch up!",
+          "ruling": "played",
+          "seconds": 6.7,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "The centre is mine next.",
+          "ruling": "played",
+          "seconds": 9.1,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "Center's mine, GPT.",
+          "ruling": "played",
+          "seconds": 5.9,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "The centre is mine now.",
+          "ruling": "played",
+          "seconds": 9.7,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Enjoy the scraps, GPT.",
+          "ruling": "played",
+          "seconds": 5.5,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "The centre is mine.",
+          "ruling": "played",
+          "seconds": 11.5,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "Your center is mine next.",
+          "ruling": "played",
+          "seconds": 5.9,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "That paint looks better mine.",
+          "ruling": "played",
+          "seconds": 12.9,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "down",
+          "think": "Moves down.",
+          "say": "Center's mine, GPT.",
+          "ruling": "played",
+          "seconds": 6.4,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "The centre is mine.",
+          "ruling": "played",
+          "seconds": 11.6,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "down",
+          "think": "Moves down.",
+          "say": "Center's mine this time.",
+          "ruling": "played",
+          "seconds": 10,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "I'll take the high ground.",
+          "ruling": "played",
+          "seconds": 10.3,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "Holds position.",
+          "say": "Center's mine. Come get it.",
+          "ruling": "played",
+          "seconds": 7.6,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "That centre won't save you.",
+          "ruling": "played",
+          "seconds": 10.8,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Center's mine. Nice try.",
+          "ruling": "played",
+          "seconds": 7.3,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "down",
+          "think": "Moves down.",
+          "say": "The centre is mine.",
+          "ruling": "played",
+          "seconds": 11.6,
+          "calls": 1
+        }
+      }
+    ],
+    [
+      {
+        "claude": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "Catch me if you can.",
+          "ruling": "played",
+          "seconds": 4.2,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "Your paint looks better on me.",
+          "ruling": "played",
+          "seconds": 12,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "Belt ride to the center, catch up!",
+          "ruling": "played",
+          "seconds": 5.3,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "The centre is mine, Claude.",
+          "ruling": "played",
+          "seconds": 10.2,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "Center's mine, come get it.",
+          "ruling": "played",
+          "seconds": 6.9,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "The centre is mine.",
+          "ruling": "played",
+          "seconds": 11.8,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Center's overrated. Enjoy bouncing.",
+          "ruling": "played",
+          "seconds": 11.5,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "The centre is mine.",
+          "ruling": "played",
+          "seconds": 10,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "Center's mine next.",
+          "ruling": "played",
+          "seconds": 7.3,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Moves right.",
+          "say": "That paint looks better mine.",
+          "ruling": "played",
+          "seconds": 13.7,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "down",
+          "think": "Moves down.",
+          "say": "Center's mine, GPT.",
+          "ruling": "played",
+          "seconds": 15.8,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Your paint looks better mine.",
+          "ruling": "played",
+          "seconds": 10.7,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "Your paint is mine now.",
+          "ruling": "played",
+          "seconds": 6.7,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Moves left.",
+          "say": "That bounty looks good on you.",
+          "ruling": "played",
+          "seconds": 10.4,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "up",
+          "think": "Moves up.",
+          "say": "Last bell, last paint.",
+          "ruling": "played",
+          "seconds": 6.4,
+          "calls": 1
+        },
+        "gpt": {
+          "move": "down",
+          "think": "Moves down.",
+          "say": "The centre is mine.",
+          "ruling": "played",
+          "seconds": 9.1,
+          "calls": 1
+        }
+      }
+    ]
+  ],
+  "end": {
+    "reason": "bouts",
+    "winner": "claude",
+    "score": {
+      "claude": 37,
+      "gpt": 32
+    },
+    "knockdowns": {
+      "claude": 0,
+      "gpt": 0
+    }
+  },
+  "calls": {
+    "claude": 24,
+    "gpt": 24
+  },
+  "seconds": 276,
+  "broadcast": "launch-2"
+}

@@ -1,0 +1,605 @@
+/* Ghost primitives. Every control is transparent at rest. Hover adds a wash, press deepens it,
+   focus adds a ring. Outline variants add a hairline, never a fill. */
+@layer primitives {
+  /* Button */
+
+  .btn {
+    --h: 32px;
+    --px: 12px;
+    --tone: var(--text);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: var(--h);
+    min-width: var(--h);
+    padding: 0 var(--px);
+    border: 1px solid transparent;
+    border-radius: var(--r-2);
+    background: transparent;
+    color: var(--text-2);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      color var(--t-1) var(--ease),
+      background-color var(--t-1) var(--ease),
+      border-color var(--t-1) var(--ease),
+      scale var(--t-1) var(--ease);
+  }
+
+  .btn:hover:not(:disabled) {
+    background: var(--wash);
+    color: var(--tone);
+  }
+
+  .btn:active:not(:disabled) {
+    background: var(--wash-2);
+    scale: 0.98;
+  }
+
+  .btn:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+  }
+
+  .btn[data-outline] {
+    border-color: var(--hairline-2);
+  }
+
+  .btn[data-outline]:hover:not(:disabled) {
+    border-color: var(--hairline-3);
+  }
+
+  .btn[data-tone="strong"] {
+    color: var(--text);
+  }
+
+  .btn[data-tone="accent"] {
+    --tone: var(--accent);
+  }
+
+  .btn[data-tone="danger"] {
+    --tone: var(--negative);
+  }
+
+  .btn[data-tone="side"] {
+    --tone: var(--side, var(--accent));
+  }
+
+  .btn:is([data-tone="accent"], [data-tone="danger"], [data-tone="side"]) {
+    color: var(--tone);
+  }
+
+  .btn:is([data-tone="accent"], [data-tone="danger"], [data-tone="side"]):hover:not(:disabled) {
+    background: color-mix(in oklab, var(--tone) 10%, transparent);
+  }
+
+  .btn:is([data-tone="accent"], [data-tone="danger"], [data-tone="side"])[data-outline] {
+    border-color: color-mix(in oklab, var(--tone) 30%, transparent);
+  }
+
+  .btn:is([data-tone="accent"], [data-tone="danger"], [data-tone="side"])[data-outline]:hover:not(
+    :disabled
+  ) {
+    border-color: color-mix(in oklab, var(--tone) 55%, transparent);
+  }
+
+  .btn[data-size="sm"] {
+    --h: 28px;
+    --px: 10px;
+    gap: 6px;
+    border-radius: var(--r-1);
+    font-size: 12px;
+  }
+
+  .btn[data-size="lg"] {
+    --h: 40px;
+    --px: 16px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .btn[data-icon-only] {
+    width: var(--h);
+    padding: 0;
+  }
+
+  /* Touch screens get a 44px hit area without changing how the control looks. */
+  @media (pointer: coarse) {
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, var(--tap));
+      height: max(100%, var(--tap));
+      translate: -50% -50%;
+    }
+  }
+
+  /* Tooltip, used by icon buttons. Appears after a short hover so it never flickers. */
+
+  .tip__bubble {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    z-index: 40;
+    padding: 5px 8px;
+    border: 1px solid var(--hairline-2);
+    border-radius: var(--r-1);
+    background: var(--bg-float);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-float);
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 450;
+    white-space: nowrap;
+    opacity: 0;
+    translate: -50% 3px;
+    pointer-events: none;
+    transition:
+      opacity var(--t-1) var(--ease),
+      translate var(--t-2) var(--ease-out);
+  }
+
+  .tip[data-tip="bottom"] .tip__bubble {
+    top: calc(100% + 8px);
+    bottom: auto;
+    translate: -50% -3px;
+  }
+
+  .tip:is(:hover, :focus-visible) .tip__bubble {
+    opacity: 1;
+    translate: -50% 0;
+    transition-delay: 320ms;
+  }
+
+  /* Keyboard key */
+
+  .kbd {
+    display: inline-grid;
+    place-items: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border: 1px solid var(--hairline-2);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  /* Dropdown */
+
+  .select {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .select__trigger {
+    gap: 6px;
+    padding-right: calc(var(--px) - 4px);
+  }
+
+  .select__trigger[aria-expanded="true"] {
+    background: var(--wash);
+    color: var(--text);
+  }
+
+  .select__value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .select__icon {
+    color: var(--text-3);
+  }
+
+  .select__chevron {
+    width: 14px;
+    height: 14px;
+    color: var(--text-3);
+    transition:
+      rotate var(--t-2) var(--ease-out),
+      color var(--t-1) var(--ease);
+  }
+
+  .select__trigger:hover .select__chevron,
+  .select__trigger[aria-expanded="true"] .select__chevron {
+    color: var(--text-2);
+  }
+
+  .select__trigger[aria-expanded="true"] .select__chevron {
+    rotate: 180deg;
+  }
+
+  /* Headline-sized trigger: the model name is the control. */
+  .select__trigger[data-size="xl"] {
+    --h: 44px;
+    --px: 10px;
+    gap: 8px;
+    border-radius: var(--r-3);
+    color: var(--text);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+  }
+
+  .select__trigger[data-size="xl"] .select__chevron {
+    width: 18px;
+    height: 18px;
+  }
+
+  .select__menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 50;
+    min-width: max(100%, 232px);
+    max-height: min(360px, 60dvh);
+    padding: 4px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--hairline-2);
+    border-radius: var(--r-3);
+    background: var(--bg-float);
+    backdrop-filter: blur(20px) saturate(150%);
+    box-shadow: var(--shadow-float);
+    transform-origin: top left;
+    animation: pop-in var(--t-2) var(--ease-out);
+  }
+
+  .select__menu:focus-visible {
+    outline: none;
+  }
+
+  .select__menu[data-align="end"] {
+    right: 0;
+    left: auto;
+    transform-origin: top right;
+  }
+
+  .select__option {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 16px;
+    padding: 8px 10px;
+    border-radius: var(--r-2);
+    color: var(--text-2);
+    font-size: 13px;
+    cursor: pointer;
+    scroll-margin: 4px;
+  }
+
+  .select__option[data-active] {
+    background: var(--wash-2);
+    color: var(--text);
+  }
+
+  .select__option[aria-selected="true"] {
+    color: var(--text);
+  }
+
+  .select__option[aria-disabled="true"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .select__option-label {
+    font-weight: 500;
+  }
+
+  .select__option-desc {
+    grid-column: 1;
+    margin-top: 2px;
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .select__check {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    width: 14px;
+    height: 14px;
+    color: var(--side, var(--accent));
+    opacity: 0;
+  }
+
+  .select__option[aria-selected="true"] .select__check {
+    opacity: 1;
+  }
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      scale: 0.97;
+      translate: 0 -4px;
+    }
+  }
+
+  /* Segmented control, built on native radios */
+
+  .seg {
+    display: inline-flex;
+    gap: 2px;
+    padding: 2px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+  }
+
+  .seg[data-outline] {
+    border-color: var(--hairline-2);
+  }
+
+  .seg__item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: var(--r-2);
+    color: var(--text-3);
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      color var(--t-1) var(--ease),
+      background-color var(--t-1) var(--ease);
+  }
+
+  .seg__item:hover {
+    color: var(--text-2);
+  }
+
+  .seg__item:has(:checked) {
+    background: var(--wash-2);
+    color: var(--text);
+  }
+
+  .seg__item:has(:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  /* Switch, built on a native checkbox */
+
+  .switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 28px;
+    color: var(--text-2);
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .switch__track {
+    position: relative;
+    width: 30px;
+    height: 18px;
+    border: 1px solid var(--hairline-3);
+    border-radius: var(--r-pill);
+    transition:
+      border-color var(--t-1) var(--ease),
+      background-color var(--t-1) var(--ease);
+  }
+
+  .switch__thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text-3);
+    transition:
+      translate var(--t-2) var(--ease-out),
+      background-color var(--t-1) var(--ease);
+  }
+
+  .switch:hover .switch__track {
+    border-color: rgb(255 255 255 / 0.28);
+  }
+
+  .switch:has(:checked) {
+    color: var(--text);
+  }
+
+  .switch:has(:checked) .switch__track {
+    border-color: color-mix(in oklab, var(--accent) 55%, transparent);
+    background: color-mix(in oklab, var(--accent) 12%, transparent);
+  }
+
+  .switch:has(:checked) .switch__thumb {
+    background: var(--accent);
+    translate: 12px 0;
+  }
+
+  .switch:has(:focus-visible) .switch__track {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .switch:has(:disabled) {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* Text field */
+
+  .field {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid transparent;
+    border-radius: var(--r-2);
+    color: var(--text-3);
+    cursor: text;
+    transition:
+      background-color var(--t-1) var(--ease),
+      border-color var(--t-1) var(--ease),
+      box-shadow var(--t-2) var(--ease);
+  }
+
+  .field:hover {
+    background: var(--wash);
+  }
+
+  .field[data-outline] {
+    border-color: var(--hairline-2);
+  }
+
+  .field:focus-within {
+    border-color: var(--hairline-3);
+    background: transparent;
+    box-shadow: 0 0 0 3px rgb(141 180 255 / 0.14);
+  }
+
+  .field input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font-size: 13px;
+  }
+
+  .field input::placeholder {
+    color: var(--text-3);
+  }
+
+  /* Badge */
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 22px;
+    padding: 0 8px;
+    border: 1px solid var(--hairline-2);
+    border-radius: var(--r-pill);
+    color: var(--text-2);
+    font-size: 11.5px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .badge[data-tone="side"] {
+    border-color: color-mix(in oklab, var(--side, var(--accent)) 34%, transparent);
+    color: var(--side, var(--accent));
+  }
+
+  .badge[data-tone="positive"] {
+    border-color: color-mix(in oklab, var(--positive) 34%, transparent);
+    color: var(--positive);
+  }
+
+  /* Status */
+
+  .status {
+    --c: var(--text-3);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--c);
+    font-size: 12.5px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .status__dot {
+    position: relative;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c);
+  }
+
+  .status[data-state="thinking"] {
+    --c: var(--side, var(--accent));
+  }
+
+  .status[data-state="thinking"] .status__dot::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border: 1px solid var(--c);
+    border-radius: 50%;
+    animation: ping 1.4s var(--ease-out) infinite;
+  }
+
+  .status[data-state="thinking"] .status__label {
+    background: linear-gradient(90deg, var(--c), var(--text), var(--c)) 0 0 / 200% 100%;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.8s linear infinite;
+  }
+
+  .status[data-state="done"] {
+    --c: var(--positive);
+  }
+
+  .status[data-state="error"] {
+    --c: var(--negative);
+  }
+
+  @keyframes ping {
+    from {
+      opacity: 0.8;
+      scale: 0.6;
+    }
+    to {
+      opacity: 0;
+      scale: 1.8;
+    }
+  }
+
+  @keyframes shimmer {
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Stat */
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stat__label {
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .stat__value {
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+}

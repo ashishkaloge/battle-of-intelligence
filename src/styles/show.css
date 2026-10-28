@@ -1,0 +1,181 @@
+@layer components {
+  /* While the full fight plays, the app's top bar steps aside for a clean recording. */
+  .app[data-presenting] {
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .app[data-presenting] .topbar {
+    display: none;
+  }
+
+  .fight {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100%;
+    min-height: 0;
+  }
+
+  .fight__strip {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto auto;
+    align-items: center;
+    gap: clamp(12px, 2vw, 28px);
+    min-height: 44px;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .fight__brand {
+    color: var(--text-2);
+  }
+
+  .fight__series {
+    display: inline-flex;
+    gap: 8px;
+  }
+
+  .fight__clock {
+    min-width: 5ch;
+    color: var(--text);
+    text-align: right;
+  }
+
+  .fight__body {
+    position: relative;
+    min-height: 0;
+    overflow-y: auto;
+    display: grid;
+  }
+
+  .fight__card {
+    position: relative;
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    width: min(520px, 92%);
+    margin-block: 20px;
+    padding: 28px 28px 24px;
+    border: 1px solid var(--hairline-2);
+    border-radius: 18px;
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    text-align: center;
+    animation: fight-in 0.5s var(--ease-out, ease-out) both;
+  }
+
+  .fight__title {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(30px, 4.5vw, 46px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+
+  .fight__score {
+    display: inline-flex;
+    gap: 12px;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .fight__lineup {
+    display: grid;
+    gap: 6px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fight__lineup li {
+    display: grid;
+    grid-template-columns: 1.6em auto 1fr;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgb(255 255 255 / 0.03);
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .fight__lineup .num {
+    color: var(--text-3);
+    font-family: var(--font-mono);
+  }
+
+  .fight__lineup em {
+    color: var(--text-3);
+    font-size: 12px;
+    font-style: normal;
+    text-align: right;
+  }
+
+  .fight__lineup em[data-won] {
+    color: var(--side, var(--text-2));
+  }
+
+  .fight__settings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .fight__lineup li[data-missing] em {
+    color: var(--trap, #ff6a57);
+  }
+
+  .fight__actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .fight__fine {
+    margin: 0;
+    color: var(--text-3);
+    font-size: 12px;
+  }
+
+  @keyframes fight-in {
+    from {
+      opacity: 0;
+      scale: 0.96;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .fight__strip {
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      padding-inline: 12px;
+    }
+
+    .fight__brand,
+    .fight__where {
+      display: none;
+    }
+
+    .fight__card {
+      padding: 24px 16px;
+    }
+
+    .fight__lineup li {
+      grid-template-columns: 1.6em 1fr;
+      gap: 4px 8px;
+    }
+
+    .fight__lineup em {
+      grid-column: 2;
+      text-align: left;
+    }
+  }
+}

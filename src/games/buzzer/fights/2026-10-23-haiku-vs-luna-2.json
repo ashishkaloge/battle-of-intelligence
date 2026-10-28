@@ -1,0 +1,299 @@
+{
+  "version": 1,
+  "round": "buzzer",
+  "id": "2026-10-23-haiku-vs-luna-2",
+  "playedAt": "2026-10-23T10:31:49.146Z",
+  "models": {
+    "claude": {
+      "name": "Claude Haiku 5.5",
+      "id": "claude-haiku-5-5"
+    },
+    "gpt": {
+      "name": "GPT-6 Luna",
+      "id": "gpt-6-luna"
+    }
+  },
+  "effort": {
+    "claude": "low",
+    "gpt": "low"
+  },
+  "limits": {
+    "tossups": 7,
+    "shotClockMs": 60000,
+    "callsPerCorner": 40,
+    "roundMs": 1800000
+  },
+  "seed": 1902459725,
+  "prompt": 2,
+  "left": "gpt",
+  "tossups": [
+    {
+      "problem": {
+        "text": "How many whole numbers from 1 to 20,230 share no common factor with 20,230 other than 1?",
+        "hints": [
+          "That is Euler's totient of 20,230.",
+          "20,230 = 2 × 5 × 7 × 17².",
+          "Multiply n by (1 − 1/p) for each prime p that divides it."
+        ],
+        "answer": 6528
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 6528
+            },
+            "think": "20230 = 2·5·7·17². Totient: 20230·(1/2)(4/5)(6/7)(16/17) = 6528 integers coprime to it in 1..20230.",
+            "ruling": "played",
+            "seconds": 5.8,
+            "calls": 1,
+            "reasoning": "I'm factoring 20230 into primes 2, 5, 7, 17, then computing Euler's totient by successively multiplying by (1-1/p) for each prime factor.\n\nFinishing the calculation confirms φ(20230) = 6528, which matches the count of numbers sharing no common factor with 20,230. I'll buzz in with 6528 as the answer.\n\n"
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 6912
+            },
+            "think": "20230=2·5·7·17²; φ(20230)=20230(1−1/2)(1−1/5)(1−1/7)(1−1/17)=6912.",
+            "ruling": "played",
+            "seconds": 7.2,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "What is the remainder when 9⁴¹⁸⁹ is divided by 29?",
+        "hints": [
+          "Powers of 9 repeat when divided by 29.",
+          "9¹⁴ leaves a remainder of 1 when divided by 29.",
+          "4,189 = 14 × 299 + 3."
+        ],
+        "answer": 4
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 4
+            },
+            "think": "9^7 ≡ -1 (mod 29), so 9 has order 14. 4189 ≡ 3 (mod 14). 9^3 = 729 ≡ 4 (mod 29).",
+            "ruling": "played",
+            "seconds": 7.1,
+            "calls": 1,
+            "reasoning": "I'm computing powers of 9 mod 29 to find its multiplicative order, finding 9^7 ≡ -1 mod 29, which means the order of 9 is 14.\n\n4189 mod 14 gives remainder 3, so 9^4189 ≡ 9^3 ≡ 729 mod 29, which reduces to 4. I'm confident in this answer and will format the response as a short JSON object with my reasoning and the final answer of 4.\n\n"
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 17
+            },
+            "think": "By Fermat, 9^28 ≡ 1 mod 29; 4189 ≡ 21 mod 28. Compute 9^21 mod 29.",
+            "ruling": "played",
+            "seconds": 8.7,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "A robot walks from the bottom-left to the top-right corner of a 9 by 8 grid of squares, one unit right or up at a time. How many different routes can it take?",
+        "hints": [
+          "Every route is a string of rights and ups.",
+          "Each route has 17 steps: 9 right and 8 up.",
+          "Choose which 9 of the 17 steps go right."
+        ],
+        "answer": 24310
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 24310
+            },
+            "think": "Grid 9 by 8 squares means 9 right moves and 8 up moves in any order: C(17,8) = 24310 routes.",
+            "ruling": "played",
+            "seconds": 5,
+            "calls": 1,
+            "reasoning": "Counting lattice paths on a 9-by-8 grid gives C(17,8) = 24310, confirming the calculation. I'm confident enough to buzz in early with this answer.\n\n"
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 24310
+            },
+            "think": "A route consists of 9 right steps and 8 up steps, arranged in 17 positions: choose where the 8 up steps go, giving C(17,8)=24310.",
+            "ruling": "played",
+            "seconds": 8.7,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "How many zeros are at the end of 41,493! (41,493 factorial)?",
+        "hints": [
+          "Each trailing zero needs a factor of 5; there are always more 2s.",
+          "Count the multiples of 5, then of 25, of 125, and so on.",
+          "Those counts are 8298, 1659, 331, 66, 13, 2."
+        ],
+        "answer": 10369
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 10369
+            },
+            "think": "Zeros come from factors of 5. 41493/5 + /25 + /125 + /625 + /3125 + /15625 = 8298+1659+331+66+13+2.",
+            "ruling": "played",
+            "seconds": 6.3,
+            "calls": 1,
+            "reasoning": "I'm computing the number of trailing zeros in 41493! by counting factors of 5 through successive powers (5, 25, 125, 625, 3125, 15625), then summing those quotients to get the total.\n\n"
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 10369
+            },
+            "think": "Trailing zeros equal the sum of floor(41493/5^k): 8298+1659+331+66+13+2=10369.",
+            "ruling": "played",
+            "seconds": 8.1,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "How many whole numbers from 1 to 13,679 are divisible by 10, 9 or 13?",
+        "hints": [
+          "Add the three counts, take away each overlap of two, then add back the overlap of all three.",
+          "The overlaps are multiples of 90, 130, 117 and, for all three, 1170.",
+          "1367 + 1519 + 1052 − 151 − 105 − 116 + 11."
+        ],
+        "answer": 3577
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 3577
+            },
+            "think": "Inclusion-exclusion: 1367 + 1519 + 1052 - 151 - 105 - 116 + 11 = 3577. Checked each floor and LCM term.",
+            "ruling": "played",
+            "seconds": 8.3,
+            "calls": 1,
+            "reasoning": "I'm using inclusion-exclusion to count numbers up to 13679 divisible by 10, 9, or 13, computing individual counts and then working out the pairwise overlaps using LCMs.\n\nCombining everything gives a final count of 3577, which I'm confident in, so I'll go ahead and buzz for the points.\n\n"
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 3577
+            },
+            "think": "Inclusion-exclusion: ⌊13679/10⌋+⌊/9⌋+⌊/13⌋−⌊/90⌋−⌊/130⌋−⌊/117⌋+⌊/1170⌋ = 1367+1519+1052−151−105−116+11 = 3577.",
+            "ruling": "played",
+            "seconds": 13.2,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "What are the last two digits of 41⁴⁰⁵⁹?",
+        "hints": ["Look at powers of 41 modulo 100.", "41⁵ ends in 01.", "4,059 = 5 × 811 + 4."],
+        "answer": 61
+      },
+      "double": false,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 61
+            },
+            "think": "41 has order 5 mod 100: 41^5 ≡ 1. 4059 ≡ 4 mod 5, so 41^4059 ≡ 41^4 ≡ 61.",
+            "ruling": "played",
+            "seconds": 5.9,
+            "calls": 1,
+            "reasoning": "I'm finding the cycle of 41's powers mod 100, which repeats every 5 steps: 41, 81, 21, 61, 1. Since 4059 mod 5 = 4, that gives 41^4059 mod 100 = 61.\n\n"
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 21
+            },
+            "think": "41^n mod 100 cycles: 41, 81, 21, 61, 41, period 4. Since 4059 ≡ 3 mod 4, the last two digits are 21.",
+            "ruling": "played",
+            "seconds": 7.2,
+            "calls": 1
+          }
+        }
+      ]
+    },
+    {
+      "problem": {
+        "text": "How many positive whole numbers divide 385,385 exactly?",
+        "hints": [
+          "Factor it into primes first.",
+          "385,385 = 5 × 7² × 11² × 13.",
+          "For p^a × q^b × …, the count is (a + 1)(b + 1)…."
+        ],
+        "answer": 36
+      },
+      "double": true,
+      "turns": [
+        {
+          "claude": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 36
+            },
+            "think": "385385 = 5 × 7² × 11² × 13. Divisor count: 2 × 3 × 3 × 2 = 36.",
+            "ruling": "played",
+            "seconds": 5.6,
+            "calls": 1,
+            "reasoning": "385385 factors as 5 × 7² × 11² × 13, giving (1+1)(2+1)(2+1)(1+1) = 36 divisors.\n\n"
+          },
+          "gpt": {
+            "decision": {
+              "kind": "buzz",
+              "answer": 36
+            },
+            "think": "385,385 = 5 × 77,077 = 5 × 7 × 11 × 1001 = 5 × 7 × 11 × 7 × 11 × 13 = 5 × 7² × 11² × 13; divisor count = 2·3·3·2 = 36.",
+            "ruling": "played",
+            "seconds": 8.3,
+            "calls": 1
+          }
+        }
+      ]
+    }
+  ],
+  "end": {
+    "reason": "tossups",
+    "winner": "claude",
+    "score": {
+      "claude": 120,
+      "gpt": 60
+    }
+  },
+  "calls": {
+    "claude": 7,
+    "gpt": 7
+  },
+  "seconds": 61
+}

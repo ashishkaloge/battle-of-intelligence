@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+.DS_Store
+tmp/
+.env
+.env.*
+!.env.example
+coverage/
+output/
+.playwright-cli/

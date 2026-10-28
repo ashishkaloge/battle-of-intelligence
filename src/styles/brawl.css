@@ -1,0 +1,510 @@
+/* Bot Brawl: the light-cycle floor, the corner between bouts, and the bot panels. The broadcast
+   frame around it lives in cast.css. */
+@layer components {
+  .brawl {
+    --tilt: 20deg;
+  }
+
+  /* Score line: matches won this bout, under the bout name. */
+
+  .brawl__center {
+    display: inline-grid;
+    justify-items: center;
+    gap: 6px;
+  }
+
+  .brawl__tally {
+    display: inline-flex;
+    gap: 14px;
+  }
+
+  .brawl__dots {
+    display: inline-flex;
+    gap: 4px;
+  }
+
+  .brawl__dots i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.5px var(--hairline-3);
+  }
+
+  .brawl__dots[data-side="claude"] i[data-on] {
+    background: var(--claude);
+    box-shadow: 0 0 8px var(--claude);
+  }
+  .brawl__dots[data-side="gpt"] i[data-on] {
+    background: var(--gpt);
+    box-shadow: 0 0 8px var(--gpt);
+  }
+
+  /* The floor */
+
+  .brawl__shake {
+    position: relative;
+    width: min(100cqw, 172cqh);
+    perspective: 1500px;
+  }
+
+  .brawl__floor {
+    position: relative;
+    aspect-ratio: var(--cols) / var(--rows);
+    border-radius: 10px;
+    background:
+      radial-gradient(70% 90% at 50% 40%, rgb(255 255 255 / 0.04), transparent 70%),
+      linear-gradient(180deg, #14171c, #0e1013);
+    box-shadow:
+      0 0 0 1px var(--hairline-2),
+      0 0 0 10px #0b0c0f,
+      0 0 0 11px var(--hairline),
+      0 40px 70px -24px rgb(0 0 0 / 0.85);
+    transform: rotateX(var(--tilt));
+    transform-style: preserve-3d;
+  }
+
+  .brawl__svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .brawl__gridline {
+    fill: none;
+    stroke: rgb(255 255 255 / 0.045);
+    stroke-width: 0.04;
+  }
+
+  .brawl__wall {
+    fill: #262a32;
+    stroke: rgb(255 255 255 / 0.12);
+    stroke-width: 0.04;
+  }
+
+  .brawl__ring {
+    fill: #2a1512;
+    stroke: color-mix(in oklab, var(--trap) 70%, transparent);
+    stroke-width: 0.06;
+    animation: brawl-ring 0.6s var(--ease-out) both;
+  }
+
+  .brawl__trail[data-fighter="claude"] {
+    --side: var(--claude);
+  }
+  .brawl__trail[data-fighter="gpt"] {
+    --side: var(--gpt);
+  }
+
+  .brawl__trail polyline {
+    fill: none;
+    stroke: var(--side);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .brawl__glow {
+    stroke-width: 0.95;
+    opacity: 0.3;
+    filter: blur(3px);
+  }
+
+  .brawl__line {
+    stroke-width: 0.42;
+  }
+
+  .brawl__burst {
+    --side: var(--claude);
+  }
+  .brawl__burst[data-fighter="gpt"] {
+    --side: var(--gpt);
+  }
+
+  .brawl__burst circle {
+    fill: none;
+    stroke: #ffe7a1;
+    stroke-width: 0.12;
+    animation: brawl-burst 0.7s var(--ease-out) both;
+  }
+
+  .brawl__burst line {
+    stroke: #ffe7a1;
+    stroke-width: 0.16;
+    stroke-linecap: round;
+    animation: brawl-rays 0.55s var(--ease-out) both;
+  }
+
+  .brawl__burst[data-bug] circle,
+  .brawl__burst[data-bug] line {
+    stroke: var(--trap);
+  }
+
+  /* Riders stand up off the cycle heads, like the Ring's fighters. */
+
+  .brawl__rider {
+    position: absolute;
+    z-index: 2;
+    width: calc(100% / var(--cols) * 1.7);
+    aspect-ratio: 1;
+    transform: translate(-50%, -78%) rotateX(calc(-1 * var(--tilt)));
+    transform-origin: 50% 100%;
+    transition:
+      left 40ms linear,
+      top 40ms linear;
+    pointer-events: none;
+  }
+
+  .brawl__rider[data-fighter="claude"] {
+    --side: var(--claude);
+  }
+  .brawl__rider[data-fighter="gpt"] {
+    --side: var(--gpt);
+  }
+
+  .brawl__body {
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 100%;
+    filter: drop-shadow(0 0 12px color-mix(in oklab, var(--side) 45%, transparent));
+    transition: scale 0.16s var(--ease-out);
+  }
+
+  .brawl__rider[data-boost] .brawl__body {
+    scale: 1.12;
+    filter: drop-shadow(0 0 18px var(--side));
+  }
+
+  .brawl__say {
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: var(--ink);
+    background: #f6f3ec;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    translate: -50% 0;
+    animation: brawl-say 1.4s var(--ease-out) both;
+  }
+
+  .brawl__loading {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    translate: -50% 0;
+  }
+
+  .brawl__banner {
+    display: grid;
+    align-content: center;
+    gap: 10px;
+    font-size: clamp(30px, 6.5cqw, 68px);
+  }
+
+  .brawl__banner small {
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 1.6cqw, 16px);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-shadow: 0 2px 12px rgb(0 0 0 / 0.9);
+    text-transform: none;
+  }
+
+  /* The corner */
+
+  .brawl__corner {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 14px;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .brawl__rule {
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+    text-align: center;
+    animation: cast-line 0.4s var(--ease-out) both;
+  }
+
+  .brawl__rule strong {
+    font-size: clamp(22px, 3.4cqw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .brawl__rule > span:last-child {
+    color: var(--text-2);
+    font-size: 14px;
+  }
+
+  .brawl__patches {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+    min-height: 0;
+    opacity: 0;
+    translate: 0 8px;
+    transition:
+      opacity var(--t-3) var(--ease),
+      translate var(--t-3) var(--ease-out);
+  }
+
+  .brawl__patches[data-shown] {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  .brawl__patch {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid var(--hairline-2);
+    border-top: 2px solid var(--side);
+    border-radius: 10px;
+    background: rgb(10 11 13 / 0.7);
+  }
+
+  .brawl__patch figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 13px;
+  }
+
+  .brawl__patch-name {
+    color: var(--side);
+    font-weight: 650;
+  }
+
+  .brawl__patch-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .brawl__stat[data-kind="add"] {
+    color: var(--positive);
+  }
+  .brawl__stat[data-kind="del"] {
+    color: var(--negative);
+  }
+
+  .brawl__patch pre {
+    margin: 0;
+    padding: 8px 0;
+    overflow: hidden;
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1.05cqw, 12px);
+    line-height: 1.55;
+  }
+
+  .brawl__patch code {
+    display: block;
+    padding: 0 12px;
+    overflow: hidden;
+    color: var(--text-2);
+    text-overflow: ellipsis;
+    white-space: pre;
+  }
+
+  .brawl__patch code[data-kind="add"] {
+    color: var(--positive);
+    background: color-mix(in oklab, var(--positive) 9%, transparent);
+  }
+
+  .brawl__patch code[data-kind="del"] {
+    color: var(--negative);
+    background: color-mix(in oklab, var(--negative) 8%, transparent);
+    text-decoration: line-through;
+    text-decoration-color: color-mix(in oklab, var(--negative) 45%, transparent);
+  }
+
+  /* Bot panels: plan, claim and truth, tests, verdict. */
+
+  .brawl__panel {
+    align-content: start;
+  }
+
+  .brawl__note {
+    min-height: 4.2em;
+    font-size: clamp(14px, 1.15vw, 16px);
+  }
+
+  .brawl__tag {
+    display: inline-block;
+    min-width: 46px;
+    margin-right: 6px;
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-style: normal;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .brawl__claim {
+    display: grid;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--wash);
+    font-size: 13px;
+    line-height: 1.4;
+    animation: cast-line 0.35s var(--ease-out) both;
+  }
+
+  .brawl__tests li > svg {
+    flex: none;
+    margin-top: 2px;
+  }
+
+  .brawl__claim p > svg {
+    margin-left: 6px;
+    vertical-align: -2px;
+  }
+
+  .brawl__claim p[data-holds] svg {
+    color: var(--positive);
+  }
+
+  .brawl__claim p:not([data-holds]):last-child {
+    color: var(--negative);
+  }
+
+  .brawl__tests {
+    display: grid;
+    gap: 6px;
+    opacity: 0.35;
+    transition: opacity var(--t-3) var(--ease);
+  }
+
+  .brawl__tests[data-shown] {
+    opacity: 1;
+  }
+
+  .brawl__tests ul {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .brawl__tests li {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    color: var(--text-2);
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+
+  .brawl__panel[data-side="right"] .brawl__tests li {
+    flex-direction: row-reverse;
+  }
+
+  .brawl__tests li[data-outcome="win"] > svg {
+    color: var(--positive);
+  }
+
+  .brawl__tests li:is([data-outcome="crash"], [data-outcome="loss"]) {
+    color: var(--negative);
+  }
+
+  .brawl__tests li[data-outcome] {
+    animation: cast-badge 0.3s var(--ease-back) both;
+  }
+
+  .brawl__tests em {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-style: normal;
+  }
+
+  .brawl__pending {
+    flex: none;
+    width: 12px;
+    height: 12px;
+    margin-top: 2px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.5px var(--hairline-3);
+  }
+
+  .brawl__verdict {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    animation: cast-line 0.3s var(--ease-out) both;
+  }
+
+  .brawl__boosts {
+    display: inline-flex;
+    margin-left: 8px;
+    color: var(--side);
+  }
+
+  @keyframes brawl-say {
+    0% {
+      opacity: 0;
+      scale: 0.6;
+    }
+    15%,
+    80% {
+      opacity: 1;
+      scale: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes brawl-ring {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes brawl-burst {
+    from {
+      opacity: 1;
+      r: 0.2;
+    }
+    to {
+      opacity: 0;
+      r: 1.6;
+    }
+  }
+
+  @keyframes brawl-rays {
+    from {
+      opacity: 1;
+      scale: 0.4;
+    }
+    to {
+      opacity: 0.85;
+      scale: 1;
+    }
+  }
+}

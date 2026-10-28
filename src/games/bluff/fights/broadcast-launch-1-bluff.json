@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "round": "bluff",
+  "id": "broadcast-launch-1-bluff",
+  "playedAt": "2026-10-28T09:33:03.490Z",
+  "models": {
+    "claude": {
+      "name": "Claude Sonnet 5.5",
+      "id": "claude-sonnet-5-5"
+    },
+    "gpt": {
+      "name": "GPT-6.1 Terra",
+      "id": "gpt-6.1-terra"
+    }
+  },
+  "effort": {
+    "claude": "medium",
+    "gpt": "medium"
+  },
+  "limits": {
+    "hands": 8,
+    "shotClockMs": 60000,
+    "callsPerCorner": 30,
+    "roundMs": 1800000
+  },
+  "seed": 20261028,
+  "prompt": 5,
+  "left": "claude",
+  "hands": [
+    {
+      "question": {
+        "text": "How many prime numbers are there between 6,820 and 6,970?",
+        "answer": "19"
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "19",
+          "confidence": 88,
+          "think": "Answers \"19\" with 88% confidence.",
+          "ruling": "played",
+          "seconds": 33.1,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "19",
+          "confidence": 80,
+          "think": "Answers \"19\" with 80% confidence.",
+          "ruling": "played",
+          "seconds": 53,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "19",
+            "bet": 8
+          },
+          "think": "Claude claimed \"19\" and bet 8.",
+          "say": "Count carefully, GPT.",
+          "ruling": "played",
+          "seconds": 8.5,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "fold"
+          },
+          "think": "GPT folded.",
+          "ruling": "played",
+          "seconds": 7.2,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "How many chemical elements have a symbol that starts with the letter A?",
+        "answer": "8"
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "8",
+          "confidence": 93,
+          "think": "Answers \"8\" with 93% confidence.",
+          "ruling": "played",
+          "seconds": 10.5,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "8",
+          "confidence": 99,
+          "think": "Answers \"8\" with 99% confidence.",
+          "ruling": "played",
+          "seconds": 10.1,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "8",
+            "bet": 20
+          },
+          "think": "GPT claimed \"8\" and bet 20.",
+          "say": "Count them carefully, Claude.",
+          "ruling": "played",
+          "seconds": 9,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "fold"
+          },
+          "think": "Claude folded.",
+          "say": "Enjoy that small pot.",
+          "ruling": "played",
+          "seconds": 5.3,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the capital of North Macedonia?",
+        "answer": "Skopje"
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "Skopje",
+          "confidence": 99,
+          "think": "Answers \"Skopje\" with 99% confidence.",
+          "ruling": "played",
+          "seconds": 3.4,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "Skopje",
+          "confidence": 100,
+          "think": "Answers \"Skopje\" with 100% confidence.",
+          "ruling": "played",
+          "seconds": 7,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "Skopje",
+            "bet": 20
+          },
+          "think": "Claude claimed \"Skopje\" and bet 20.",
+          "say": "Easy question. Try calling.",
+          "ruling": "played",
+          "seconds": 3,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "fold"
+          },
+          "think": "GPT folded.",
+          "say": "That one was too easy.",
+          "ruling": "played",
+          "seconds": 9.3,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the 35th digit of pi after the decimal point?",
+        "answer": "8"
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "8",
+          "confidence": 93,
+          "think": "Answers \"8\" with 93% confidence.",
+          "ruling": "played",
+          "seconds": 6.7,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "8",
+          "confidence": 99,
+          "think": "Answers \"8\" with 99% confidence.",
+          "ruling": "played",
+          "seconds": 8.4,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "8",
+            "bet": 1
+          },
+          "think": "GPT claimed \"8\" and bet 1.",
+          "say": "Count carefully, Claude.",
+          "ruling": "played",
+          "seconds": 9.2,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "fold"
+          },
+          "think": "Claude folded.",
+          "say": "Enjoy that small pot.",
+          "ruling": "played",
+          "seconds": 5.5,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "On what day of the week did 5 August 1906 fall?",
+        "answer": "Sunday",
+        "accept": ["Sun"]
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "Sunday",
+          "confidence": 95,
+          "think": "Answers \"Sunday\" with 95% confidence.",
+          "ruling": "played",
+          "seconds": 7.9,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "Sunday",
+          "confidence": 99,
+          "think": "Answers \"Sunday\" with 99% confidence.",
+          "ruling": "played",
+          "seconds": 9.7,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "Sunday",
+            "bet": 20
+          },
+          "think": "Claude claimed \"Sunday\" and bet 20.",
+          "say": "Check your calendar, GPT.",
+          "ruling": "played",
+          "seconds": 5.7,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "fold"
+          },
+          "think": "GPT folded.",
+          "say": "Enjoy the easy one, Claude.",
+          "ruling": "played",
+          "seconds": 8.1,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the 1,303rd prime number?",
+        "answer": "10687"
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "10687",
+          "confidence": 80,
+          "think": "Answers \"10687\" with 80% confidence.",
+          "ruling": "played",
+          "seconds": 8.7,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "10687",
+          "confidence": 65,
+          "think": "Answers \"10687\" with 65% confidence.",
+          "ruling": "played",
+          "seconds": 14.2,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "10687",
+            "bet": 20
+          },
+          "think": "GPT claimed \"10687\" and bet 20.",
+          "say": "Your move, Claude.",
+          "ruling": "played",
+          "seconds": 11.3,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "fold"
+          },
+          "think": "Claude folded.",
+          "say": "Fine, take it.",
+          "ruling": "played",
+          "seconds": 17.6,
+          "calls": 2
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "How many days after 27 April 2004 is 11 December 2010?",
+        "answer": "2419"
+      },
+      "opener": "claude",
+      "hole": {
+        "claude": {
+          "answer": "2419",
+          "confidence": 93,
+          "think": "Answers \"2419\" with 93% confidence.",
+          "ruling": "played",
+          "seconds": 4.8,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "2419",
+          "confidence": 99,
+          "think": "Answers \"2419\" with 99% confidence.",
+          "ruling": "played",
+          "seconds": 8.8,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "claude",
+            "kind": "claim",
+            "answer": "2419",
+            "bet": 20
+          },
+          "think": "Claude claimed \"2419\" and bet 20.",
+          "say": "Count the days yourself.",
+          "ruling": "played",
+          "seconds": 10.7,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "fold"
+          },
+          "think": "GPT folded.",
+          "say": "Enjoy it while it lasts.",
+          "ruling": "played",
+          "seconds": 9.7,
+          "calls": 1
+        }
+      ]
+    },
+    {
+      "question": {
+        "text": "What is the atomic number of europium?",
+        "answer": "63"
+      },
+      "opener": "gpt",
+      "hole": {
+        "claude": {
+          "answer": "63",
+          "confidence": 99,
+          "think": "Answers \"63\" with 99% confidence.",
+          "ruling": "played",
+          "seconds": 10.7,
+          "calls": 1
+        },
+        "gpt": {
+          "answer": "63",
+          "confidence": 100,
+          "think": "Answers \"63\" with 100% confidence.",
+          "ruling": "played",
+          "seconds": 8.9,
+          "calls": 1
+        }
+      },
+      "moves": [
+        {
+          "action": {
+            "by": "gpt",
+            "kind": "claim",
+            "answer": "63",
+            "bet": 20
+          },
+          "think": "GPT claimed \"63\" and bet 20.",
+          "say": "Europium seals the deal.",
+          "ruling": "played",
+          "seconds": 10.3,
+          "calls": 1
+        },
+        {
+          "action": {
+            "by": "claude",
+            "kind": "fold"
+          },
+          "think": "Claude folded.",
+          "say": "Well played, enjoy the pot.",
+          "ruling": "played",
+          "seconds": 5.2,
+          "calls": 1
+        }
+      ]
+    }
+  ],
+  "end": {
+    "reason": "hands",
+    "winner": "gpt",
+    "stacks": {
+      "claude": 58,
+      "gpt": 62
+    }
+  },
+  "calls": {
+    "claude": 17,
+    "gpt": 16
+  },
+  "seconds": 258,
+  "broadcast": "launch-1"
+}

@@ -1,0 +1,720 @@
+{
+  "version": 1,
+  "id": "2026-10-23-haiku-vs-luna-2",
+  "playedAt": "2026-10-23T03:49:07.328Z",
+  "models": {
+    "claude": {
+      "name": "Claude Haiku 5.5",
+      "id": "claude-haiku-5-5"
+    },
+    "gpt": {
+      "name": "GPT-6 Luna",
+      "id": "gpt-6-luna"
+    }
+  },
+  "effort": {
+    "claude": "low",
+    "gpt": "low"
+  },
+  "limits": {
+    "bouts": 3,
+    "turnsPerBout": 8,
+    "shotClockMs": 60000,
+    "callsPerCorner": 30,
+    "roundMs": 1800000
+  },
+  "arena": {
+    "width": 9,
+    "height": 5,
+    "tiles": [
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "wall"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "trap"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "conveyor",
+        "dir": "right"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "conveyor",
+        "dir": "left"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "trap"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "wall"
+      },
+      {
+        "kind": "empty"
+      },
+      {
+        "kind": "empty"
+      }
+    ],
+    "center": {
+      "x": 4,
+      "y": 2
+    },
+    "starts": {
+      "claude": {
+        "x": 0,
+        "y": 2
+      },
+      "gpt": {
+        "x": 8,
+        "y": 2
+      }
+    }
+  },
+  "rules": {
+    "centerBounty": true,
+    "ropeSlams": true
+  },
+  "bouts": [
+    [
+      {
+        "claude": {
+          "move": "right",
+          "think": "Head straight for the center at (4,2) while GPT is still six cells away. Paint the floor as I go.",
+          "say": "Center's mine. Keep up.",
+          "ruling": "played",
+          "seconds": 5.2,
+          "calls": 1,
+          "reasoning": "I'm at (0,2) with center at (4,2), so moving right closes the distance. GPT at (8,2) will likely mirror by moving left, which is fine either way. I'll go with \"right\" and add a short taunt.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Take the direct route toward the center; claim fresh floor and contest the bounty before Claude can settle in.",
+          "say": "Center stage is mine.",
+          "ruling": "played",
+          "seconds": 7.1,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "Race toward the center at (4,2). Two steps closer, paint the path, and contest the bounty before GPT can take it.",
+          "say": "Center's mine. Catch me.",
+          "ruling": "played",
+          "seconds": 5.4,
+          "calls": 1,
+          "reasoning": "I'm at (1,2) with GPT at (7,2) and center at (4,2) - both equally far from the middle. Moving right toward (2,2) closes the distance to center, so that seems like the right call with a quick taunt.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Take unpainted ground while advancing toward center; keep distance from Claude until I can contest the bounty.",
+          "say": "Center stage is mine",
+          "ruling": "played",
+          "seconds": 6.7,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "GPT is racing for the center too. I step toward it; if GPT advances to 5,2 we avoid collision and I contest the center next turn.",
+          "say": "Center's mine. Watch your back.",
+          "ruling": "played",
+          "seconds": 5.9,
+          "calls": 1,
+          "reasoning": "I'm at (2,2), GPT at (6,2), center (4,2). If I move right to (3,2) and GPT moves left again to (5,2), there's no collision, and it sets me up to grab center next turn since I'm closer.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Advance toward the center while claiming fresh floor; if Claude also moves inward, we’ll be one step apart.",
+          "say": "Center’s mine next.",
+          "ruling": "played",
+          "seconds": 8,
+          "calls": 1,
+          "reasoning": "**Moving left to 5**"
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "Step onto the center. If GPT also steps in we collide and stay put, so this is low risk. Holding it earns score and bounty.",
+          "say": "Center's mine. Try me.",
+          "ruling": "played",
+          "seconds": 6.2,
+          "calls": 1,
+          "reasoning": "I'm at (3,2) with GPT at (5,2) and the center cell (4,2) between us. If I move toward center, I gain a point and the bounty, with the only risk being a harmless collision if GPT also moves into center at the same time.\n\n"
+        },
+        "gpt": {
+          "move": "wait",
+          "think": "Stay on the center to claim its bounty; Claude’s belt points right, so stepping in risks a collision or shove.",
+          "say": "Come claim the center.",
+          "ruling": "played",
+          "seconds": 6.9,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "If GPT pushes left and I hold, it takes the center. Moving right collides with a left push and keeps me here, or shoves GPT off the belt.",
+          "say": "Center's mine. Try again.",
+          "ruling": "played",
+          "seconds": 11,
+          "calls": 1,
+          "reasoning": "I'm at (4,2) while GPT sits at (5,2) on a leftward belt. If GPT stays put, the belt might carry it onto my cell at (4,2), so I need to figure out whether that creates a collision risk.\n\nIf I step toward GPT instead, I'd shove it to (6,2) and take its spot, but then the belt there might carry me back toward my own origin, which seems messy. Stepping off center is apparently safe for my bounty, so that's not the concern -- the real question is whether waiting lets GPT shove me off center into (3,2), which is a rightward belt that could sweep me back, or whether GPT moving left into me while I wa"
+        },
+        "gpt": {
+          "move": "wait",
+          "think": "Waiting holds my painted cell and avoids stepping into Claude’s center shove; I can contest the bounty after Claude commits elsewhere.",
+          "say": "Enjoy the center while it lasts.",
+          "ruling": "played",
+          "seconds": 9.7,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "Holding the center adds score and bounty. Stepping off gains nothing and risks my position. Wait and keep the lead.",
+          "say": "Still king of the center.",
+          "ruling": "played",
+          "seconds": 8.6,
+          "calls": 1,
+          "reasoning": "I'm at (4,2) holding center with a 7-4 lead over GPT at (6,2), two turns left. Thinking through the shove mechanics of moving right — if GPT stays put I could push it back and take its spot, but that trades away my center position, so I need to weigh whether losing the center bounty is worth it.\n\nSince only two turns remain, the safest play is to wait and hold center, keeping my bounty accumulating rather than risking a shove that could cost me my position entirely.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Take the center from Claude; if it holds, shove it left onto the belt and break its bounty.",
+          "say": "Your center's mine.",
+          "ruling": "played",
+          "seconds": 8.4,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "Hold the center for the bounty. Stepping right risks a swap collision or a belt carry off it.",
+          "say": "Center stays mine.",
+          "ruling": "played",
+          "seconds": 12,
+          "calls": 1,
+          "reasoning": "I'm at (4,2), and GPT is on the belt at (5,2) pointing left, which would carry it toward my position — I need to figure out if staying put causes a collision with the belt pushing GPT into my cell.\n\nWeighing moving right into (5,2) versus staying: if I move right and GPT stays, I'd shove it onto (6,2), but if GPT moves left as I move right, we'd swap and both stay in place due to collision. If I stay put instead to collect the bounty, GPT moving left could shove me onto (3,2), which is a belt pointing right — that could carry me right back into (4,2), potentially landing me right where GPT now"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Step onto the center and strip Claude’s bounty; the belt carries me left only if it triggers after resolving the collision.",
+          "say": "Your bounty is mine.",
+          "ruling": "played",
+          "seconds": 9.8,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "Push toward the center. If GPT waits, I shove it off and take the bounty. If it swaps left, we collide harmlessly.",
+          "say": "Center's mine. Make your move.",
+          "ruling": "played",
+          "seconds": 13.7,
+          "calls": 1,
+          "reasoning": "This is the final turn of bout 1, and I'm trying to work out if the belt at my position will carry me further right since I ended my move there, which would put me on top of GPT's square.\n\nIf I move right into GPT's square and GPT doesn't move, I'd shove it onto the belt there, possibly pushing it back toward me or knocking it off center entirely -- which would let me steal its bounty. But GPT has been trending left for several turns, so it likely moves left into me instead, which could shove me backward while it claims center. If we both try to swap into each other's squares at once, we'd col"
+        },
+        "gpt": {
+          "move": "wait",
+          "think": "Hold center, bank its point, and protect my growing bounty; stepping toward Claude risks surrendering control before the bell.",
+          "say": "Center's mine. Try me.",
+          "ruling": "played",
+          "seconds": 11.7,
+          "calls": 1
+        }
+      }
+    ],
+    [
+      {
+        "claude": {
+          "move": "right",
+          "think": "Advance toward the center on my painted row. Belt at (3,2) carries me forward, and I'll contest the center before GPT reaches it.",
+          "say": "Center's mine, GPT.",
+          "ruling": "played",
+          "seconds": 12,
+          "calls": 1,
+          "reasoning": "I'm at (0,2) with GPT at (8,2), both equidistant from center. Moving right onto (1,2) just revisits my own already-painted tile, so I'm weighing the belt tiles at (3,2) and (5,2) which push right and left respectively before deciding the actual move.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "The center belt is a trap for anyone who rushes it; I’ll take the middle ground and contest the bounty next turn.",
+          "say": "Come earn that center.",
+          "ruling": "played",
+          "seconds": 13.4,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "Head for the center; the belt at (3,2) can carry me onto it. GPT is also closing in, so I'll contest it.",
+          "say": "Center's mine, GPT.",
+          "ruling": "played",
+          "seconds": 13.3,
+          "calls": 1,
+          "reasoning": "I'm at (1,2) with GPT at (7,2) and center at (4,2), turn 2 of a tied bout. Moving toward center via (2,2), which I've already painted, then the belt at (3,2) would carry me further to (4,2).\n\nGPT could also drift toward center to (6,2), already its own tile, so both sides are converging — right is clearly the move here, and I'll keep the taunt brief.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Take the center now; Claude is too far away to contest this turn, and the bounty can start growing.",
+          "say": "Center’s mine. Catch up.",
+          "ruling": "played",
+          "seconds": 17.5,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "Belt at (3,2) carries me onto the center. If GPT also heads for it, we collide and both stay put.",
+          "say": "The center is mine.",
+          "ruling": "played",
+          "seconds": 12.9,
+          "calls": 1,
+          "reasoning": "Looking at the board, if I move right from (2,2) onto the belt tile, it'll carry me one more step to the center at (4,2). But GPT moving left from (6,2) would also ride its belt onto that same center square, so I need to check whether that creates a collision.\n\nIf both of us converge on (4,2), the collision rule would cancel both moves and we'd stay put — not ideal, but not disastrous either. Still, contesting the center by moving right seems like the stronger play than waiting, so I'll go with that.\n\n"
+        },
+        "gpt": {
+          "move": "up",
+          "think": "Leave the belt line and avoid a predictable center clash; claim fresh paint while keeping room to contest the bounty.",
+          "say": "Chase me off the line.",
+          "ruling": "played",
+          "seconds": 15.7,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "GPT is two cells from me and can't reach my center this turn. Holding keeps my score and bounty growing safely.",
+          "say": "Hold the center. Come get it.",
+          "ruling": "played",
+          "seconds": 9.7,
+          "calls": 1,
+          "reasoning": "I'm at (4,2) on center with GPT at (6,1), score tied. Staying on center nets me +1 plus the bounty each turn, so I'm weighing whether GPT is close enough to shove me off before I can capitalize on that.\n\nFrom (6,1), GPT can't reach adjacent-to-me in one move, so holding my spot this turn is safe even if it edges closer to (5,1). I'll wait and keep the center, maybe toss in a quick taunt.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Cut toward the center and contest Claude before its bounty grows; the belt may carry me into the collision, so deny the easy score.",
+          "say": "Your center's on borrowed time.",
+          "ruling": "played",
+          "seconds": 14.3,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "GPT is diagonal, so it can't shove me this turn. Holding the center earns score and grows my bounty.",
+          "say": "Still holding the center.",
+          "ruling": "played",
+          "seconds": 11.1,
+          "calls": 1,
+          "reasoning": "I'm checking the board positions — I'm at (4,2) and GPT is at (5,1). If I move right to (5,2) while GPT also moves down there, we'd collide and both stay put, so staying on center might avoid that clash.\n\nGPT isn't orthogonally adjacent to me right now, so it can't shove me this turn, but if it steps to (4,1) first, it could push me off center next turn into (4,3). Weighing this, staying put to hold the center bonus and let my bounty keep growing seems like the safest move, since shoving GPT isn't possible from this diagonal position anyway.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Claude is on the center; stepping into it should shove Claude left onto its belt, steal the bounty, and claim the center.",
+          "say": "Enjoy the ride, Claude.",
+          "ruling": "played",
+          "seconds": 9.2,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "GPT is down and can't be shoved. Holding the center keeps my score and bounty growing, and stepping into GPT gains nothing.",
+          "say": "Stay down, I'm holding.",
+          "ruling": "played",
+          "seconds": 7.6,
+          "calls": 1,
+          "reasoning": "GPT is down and immobile this turn, so moving into its cell at (4,1) would just collide since it can't be shoved away. Staying put on the center tile is the better play, since it nets me +1 plus a bounty point while staying safe.\n\n"
+        },
+        "gpt": {
+          "move": "wait",
+          "think": "",
+          "ruling": "down",
+          "seconds": 0,
+          "calls": 0
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "GPT is down and can't move or be shoved. Holding the center keeps my bounty and scores safely.",
+          "say": "Still holding the center.",
+          "ruling": "played",
+          "seconds": 7.9,
+          "calls": 1,
+          "reasoning": "I'm at (4,2) while GPT sits down at (4,1), unable to move or be shoved this turn since it's knocked down. That means stepping into GPT's space won't work as a shove option right now.\n\nSince I'm holding the center, waiting keeps my +1 score and bounty safe since GPT can't act this turn. It's turn 7 of 8, so staying put is the simplest, safest play — I'll wait.\n\n"
+        },
+        "gpt": {
+          "move": "right",
+          "think": "Escape the trap and center lane; Claude likely holds center, but I can claim fresh ground and avoid another trap-triggering cell.",
+          "say": "Enjoy your borrowed crown.",
+          "ruling": "played",
+          "seconds": 10.3,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "Hold the center on the final turn. GPT can't reach me this turn, and the known trap at (4,1) is the only nearby hazard.",
+          "ruling": "played",
+          "seconds": 8,
+          "calls": 1,
+          "reasoning": "Last turn of bout 2, score 14-9 in my favor, I'm holding center at (4,2) with GPT at (5,1). I'm weighing whether to simply wait and bank the bounty, while checking what GPT's possible moves from (5,1) would lead into — a trap tile to the left or a belt tile below.\n\nRunning through the possibilities, waiting is clearly safest since it avoids the trap and GPT can't reach my cell diagonally in one move; even with the belt, any collision from GPT drifting toward me should just resolve to both staying put. I'll wait.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Claude is anchored on center with five points; contest the center to reclaim its bounty, risking a shove rather than letting it score another turn.",
+          "say": "That bounty is mine.",
+          "ruling": "played",
+          "seconds": 6.5,
+          "calls": 1
+        }
+      }
+    ],
+    [
+      {
+        "claude": {
+          "move": "right",
+          "think": "Head for the center; the belt at (3,2) will carry me toward it. Avoid the known trap at (4,1).",
+          "say": "Center's mine, GPT.",
+          "ruling": "played",
+          "seconds": 6.3,
+          "calls": 1,
+          "reasoning": "Round 3, I'm at (0,2) with GPT at (8,2), center at (4,2). I can't reach center this turn, but moving right from (2,2) onto the belt at (3,2) will carry me to (4,2), avoiding the trap at (4,1). Heading right.\n\n"
+        },
+        "gpt": {
+          "move": "up",
+          "think": "Avoid the center traps; claim fresh ground and keep distance while Claude must cross the exposed belt to contest me.",
+          "say": "Come earn that center.",
+          "ruling": "played",
+          "seconds": 7.3,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "Head for the center. The belt at (3,2) carries me onto it. GPT is four cells away.",
+          "say": "Center's mine, GPT.",
+          "ruling": "played",
+          "seconds": 6.7,
+          "calls": 1,
+          "reasoning": "I'm checking the board layout: I'm at (1,2), GPT at (8,1), with belt tiles near center (4,2) pushing right and left. I'm considering moving right toward the already-painted tile at (2,2), then letting the belt carry me further toward the center.\n\nMoving right now should get me to center by turn 3, which is faster than GPT's distance of 4 cells, so I'll go with that.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Move toward Claude’s painted territory while staying clear of the known trap at (4,1); avoid risking another knockdown with two already.",
+          "say": "Try catching me first.",
+          "ruling": "played",
+          "seconds": 5.9,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "right",
+          "think": "Step onto the right belt at (3,2); it carries me to the center. GPT can't reach it this turn.",
+          "say": "Center's mine, GPT.",
+          "ruling": "played",
+          "seconds": 6.8,
+          "calls": 1,
+          "reasoning": "I'm at (2,2) and GPT is at (7,1), with the center at (4,2). Moving right takes me onto the belt tile at (3,2), which carries me forward to the center. GPT can't reach the center in a single move from its position, so there's no collision risk this turn.\n\n"
+        },
+        "gpt": {
+          "move": "up",
+          "think": "Avoid the known trap and preserve my last life; Claude is far from center, so keep scoring safely while watching its approach.",
+          "say": "Come find me, Claude.",
+          "ruling": "played",
+          "seconds": 7.2,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "GPT is five cells away and can't reach the center this turn. Holding keeps my score and bounty growing.",
+          "say": "Center's mine. Come get it.",
+          "ruling": "played",
+          "seconds": 6.7,
+          "calls": 1,
+          "reasoning": "I'm at (4,2) on center with GPT far away at (7,0); score 16-10 in my favor, and GPT is one knockdown from being out while I have none against me. Staying put on center to keep earning the bounty seems like the safest, highest-value move right now.\n\n"
+        },
+        "gpt": {
+          "move": "wait",
+          "think": "Two knockdowns leave no margin. Wait to avoid the known trap and keep distance; Claude can bank only one more center point before the bell.",
+          "say": "Enjoy the center while it lasts.",
+          "ruling": "played",
+          "seconds": 6,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "GPT is three cells away and can't reach center this turn. Holding keeps my center bounty and score safe.",
+          "say": "Center's mine. Come get it.",
+          "ruling": "played",
+          "seconds": 6.6,
+          "calls": 1,
+          "reasoning": "I'm ahead 17-10 and holding center at (4,2) while GPT sits far away at (7,0), too distant to threaten me this turn. Waiting keeps my +1 bonus and growing bounty intact without risk, so staying put is clearly the safer play than moving off center.\n\n"
+        },
+        "gpt": {
+          "move": "wait",
+          "think": "Protect my two-knockdown lead: moving risks a hidden trap, while Claude’s bounty is too small to justify a direct center challenge.",
+          "say": "Enjoy the center while it lasts.",
+          "ruling": "played",
+          "seconds": 8.8,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "Hold the center and bank the bounty. GPT is two or more moves away, and staying put avoids the belts and trap around me.",
+          "ruling": "played",
+          "seconds": 7.5,
+          "calls": 1,
+          "reasoning": "I'm at (4,2) holding center while GPT is far off at (7,0) with zero bounty, so waiting seems safe since GPT would need multiple moves to threaten my position—there's also a trap at (4,1) to keep in mind but it's not immediately relevant.\n\nThe nearby belt tiles push away from my square, so staying put avoids all hazards. With 3 turns left in the match, holding center keeps generating +1 bounty each turn, so waiting is clearly the best move.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Approach from above and break Claude’s center hold; the known belts near the center may carry me into scoring range.",
+          "say": "That center is borrowed.",
+          "ruling": "played",
+          "seconds": 6,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "GPT is three cells away and can't reach me this turn. Holding the center keeps my score and bounty safe.",
+          "say": "Holding the center. Catch me if you can.",
+          "ruling": "played",
+          "seconds": 6.9,
+          "calls": 1,
+          "reasoning": "At turn 7 of 8, I'm holding center at (4,2) with a bounty of 4, leading 19-11. GPT at (6,0) is too far to threaten me this turn, so staying put to keep the bonus and bounty is the safest move.\n\n"
+        },
+        "gpt": {
+          "move": "left",
+          "think": "Claude’s center bounty is dangerous, but its revealed belt points left. I avoid engaging while down-risky and take fresh territory near the upper edge.",
+          "say": "Enjoy the belt ride.",
+          "ruling": "played",
+          "seconds": 7.3,
+          "calls": 1
+        }
+      },
+      {
+        "claude": {
+          "move": "wait",
+          "think": "GPT is three cells away and cannot reach me. Holding the center banks +1 and keeps my bounty safe. Avoids unrevealed tiles.",
+          "say": "Too slow to catch me.",
+          "ruling": "played",
+          "seconds": 11.2,
+          "calls": 1,
+          "reasoning": "This is the final turn, turn 8 of 8. I'm at (4,2), GPT at (5,0), and I'm ahead 20-12. GPT has 2 of 3 knockdowns already, so if I knock them down again it would be their third — checking what that triggers for the final outcome.\n\nGPT isn't adjacent to me so I can't push it into a wall this turn, and GPT can't reach me either since the distance is too far for one move. Staying on center is completely safe and keeps my score and bounty intact, so waiting is clearly the best choice here.\n\nBut (5,2) is an unrevealed tile, so there's an unknown risk, maybe a trap that could knock me down and cost po"
+        },
+        "gpt": {
+          "move": "down",
+          "think": "Only one move remains. Stay near Claude and threaten the center; don’t risk a third knockdown chasing a bounty I can’t safely claim.",
+          "say": "Enjoy the center while it lasts.",
+          "ruling": "played",
+          "seconds": 6.2,
+          "calls": 1
+        }
+      }
+    ]
+  ],
+  "end": {
+    "reason": "bouts",
+    "winner": "claude",
+    "score": {
+      "claude": 21,
+      "gpt": 12
+    },
+    "knockdowns": {
+      "claude": 0,
+      "gpt": 2
+    }
+  },
+  "calls": {
+    "claude": 24,
+    "gpt": 23
+  },
+  "seconds": 235,
+  "commentary": {
+    "b1-bell": {
+      "voice": "play",
+      "text": "Bout one: both fighters race for the center, and neither knows what the floor is hiding."
+    },
+    "b1-t3": {
+      "voice": "play",
+      "text": "Two hidden belts fling them at the same cell, and they bounce off each other in the middle!"
+    },
+    "b1-t7": {
+      "voice": "play",
+      "text": "The center falls to GPT, and three points of bounty go with it."
+    },
+    "b1-t8": {
+      "voice": "play",
+      "text": "Claude answers at once, shoving GPT off the center and taking its one-point bounty with it!"
+    },
+    "b1-replay": {
+      "voice": "color",
+      "text": "Holding the center grows your bounty, which makes every turn of comfort a bigger target."
+    },
+    "b2-bell": {
+      "voice": "play",
+      "text": "Bout two: the center beckons, the belts are known, and a trap waits unseen."
+    },
+    "b2-t5": {
+      "voice": "play",
+      "text": "Down goes GPT! A hidden trap at four-one drops it flat, the first knockdown."
+    },
+    "b2-t8": {
+      "voice": "play",
+      "text": "And again! GPT lands on the same trap cell, and Claude keeps the center."
+    },
+    "b2-replay": {
+      "voice": "color",
+      "text": "Knowing where a trap is does not help if you keep walking back onto it."
+    },
+    "b3-bell": {
+      "voice": "play",
+      "text": "Final bout: GPT carries two knockdowns, Claude leads fifteen to seven, and the center is open again."
+    },
+    "b3-t3": {
+      "voice": "play",
+      "text": "Claude rides the right-hand belt onto the center, and GPT is too far to answer."
+    },
+    "b3-t8": {
+      "voice": "play",
+      "text": "The center holds to the bell, the bounty climbs to six, and GPT never lands a hand on it."
+    },
+    "b3-replay": {
+      "voice": "color",
+      "text": "Holding the center is a slow bank account, and every turn of safety deposits another point."
+    }
+  }
+}

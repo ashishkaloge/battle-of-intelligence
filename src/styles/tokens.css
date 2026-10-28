@@ -1,0 +1,58 @@
+/* Layer order for the whole app. Later layers win, so components can restyle primitives without
+   specificity fights. */
+@layer tokens, reset, primitives, components;
+
+/* Design tokens. The system is "ghost": controls are transparent at rest, gain a soft wash on
+   hover and a hairline on focus. Color is spent only where it carries meaning: a fighter's
+   corner (--claude, --gpt), focus and links (--accent), and results. */
+@layer tokens {
+  :root {
+    color-scheme: dark;
+
+    --bg: #08090a;
+    --bg-float: rgb(17 18 20 / 0.86);
+
+    /* Text, loudest to quietest. --text-3 still clears 4.5:1 on --bg for small text. */
+    --text: #ededef;
+    --text-2: #a3a6ad;
+    --text-3: #7d818b;
+
+    /* Hairlines replace boxes and fills. */
+    --hairline: rgb(255 255 255 / 0.06);
+    --hairline-2: rgb(255 255 255 / 0.1);
+    --hairline-3: rgb(255 255 255 / 0.18);
+
+    /* Washes are the only "fill" a ghost control ever gets. */
+    --wash: rgb(255 255 255 / 0.045);
+    --wash-2: rgb(255 255 255 / 0.075);
+
+    --accent: #8db4ff;
+    --positive: #7ddca6;
+    --negative: #ff8080;
+
+    /* Fighter corners. Each side of the arena sets --side to one of these. */
+    --claude: #e4876b;
+    --gpt: #46d3a7;
+
+    --font: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --r-1: 6px;
+    --r-2: 8px;
+    --r-3: 12px;
+    --r-pill: 999px;
+
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --t-1: 120ms;
+    --t-2: 200ms;
+    --t-3: 360ms;
+
+    --shadow-float:
+      inset 0 1px 0 rgb(255 255 255 / 0.04), 0 18px 50px -12px rgb(0 0 0 / 0.75),
+      0 4px 12px -4px rgb(0 0 0 / 0.5);
+
+    /* Smallest comfortable tap area on a touch screen. */
+    --tap: 44px;
+  }
+}
